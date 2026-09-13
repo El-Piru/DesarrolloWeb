@@ -30,7 +30,7 @@
 
     <main class="container">
 
-        <section class="vista-content active">
+        <section id="VistaNuevoPartido" class="vista-content active">
             <div class="card-form">
                 <h2>Crear Nuevo Partido</h2>
                 <form id="formNuevoPartido">
@@ -82,10 +82,32 @@
 
             <div class="marcador-equipos">
                 <div class="equipo-marcador">
-                    <h3 id="marcadorLocalNombre">Equipo Local</h3>
+                    <h3 id="marcadorLocalNombre">Equipo Local: </h3>
                     <div class="marcador-goles" id="golesLocal">0</div>
                 </div>
+                <span class="marcador-separador">:</span>
+                <div class="equipo-marcador">
+                    <h3 id="marcadorVisitaNombre">Equipo Visitante: </h3>
+                    <div class="marcador-goles" id="golesVisita">0</div>
+                </div>
             </div>
+
+            <div class="acciones-partido">
+                <button id="btnGol" class ="btn-accion">Gol</button>
+                <button id="btnAmarrilla" class ="btn-accion btn-Amarrilla">Tarjeta Amarilla</button>
+                <button id="btnRoja" class="btn-accion btn-Roja">Tarjeta Roja</button>
+                <button id="btnCambio" class="btn-accion btn-Cambio">Cambio</button>
+                <button id="btnFinalizarPartido" class="btn-FinalizarPartido">Finalizar Partido</button>
+            </div>
+
+            <div class="historial-eventos">
+                <h3>Incidencias del Partido</h3>
+                <ul id="ListaEventos" class="Lista-eventos">
+                    <li class="Evento-vacio">No hay Incidencias Registradas</li>
+                </ul>
+
+            </div>
+
         </section>
 
     </main>
