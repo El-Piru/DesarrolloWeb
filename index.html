@@ -1,35 +1,95 @@
 <!DOCTYPE html>
-
-<html lang = "es">
-
+<html lang="es">
 <head>
-    <!-- Chatset="UTF-8" es para agregar caracteres mundiales como la tilde o la eniexd-->
     <meta charset="UTF-8">
-
-    <!-- el nombre que aparece en la pestania-->
-    <title>MiFutbolito</title>
-
-    <!-- link para enlazar , rel de relationship (relacion ), href ruta o nombre del archivo-->
-    <link rel="stylesheet" href="style.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiFutbolito - Acta Digital</title>
+    <link rel="stylesheet" href="Style.css">
 </head>
-
 <body>
-    <!-- hay h1 al h5 , significa heading (encabezado de nivel x) es para titulos hasta h5 mas chicos-->
-    <h1>MiFutbolito</h1>
 
-    <!-- div de devision o contenedor -->
-    <div class="tarjeta">
-        <!-- p de paragraph(Parrafo) -->
-        <p class="estado">UwU</p>
-            <button id="BOTTOMSINGUP">iniciar sesion</button>
+    <header class="navbar">
+        <div class="logo">
+            <span>⚽</span>
+            <h1>Acta<span>DIGITAL</span></h1>
+        </div>
+        <div class="usuario-panel">
+            <span id="userBadge" class="badge">Árbitro: Pepito</span>
+            <button id="cambiarRol">Cambiar a Admin</button>
+        </div>
+    </header>
 
-        <p id ="reloj">Tiempo : 00:00:00</p>
-        <input type="text" id="inputCliente" placeholder="Ingrese su nombre">
-    </div>
+
+    <nav class="subnav">
+        <button class="nav-link active">Crear Partido</button>
+        <button class="nav-link">Partidos</button>
+        <button class="nav-link">En vivo</button>
+        <button class="nav-link">Administrar Equipos</button>
+        <button class="nav-link">Historial Actas</button>
+    </nav>
+
+    <main class="container">
+
+        <section class="vista-content active">
+            <div class="card-form">
+                <h2>Crear Nuevo Partido</h2>
+                <form id="formNuevoPartido">
+
+                    <div class="form-group">
+                        <label for="selectLocal">Equipo Local</label>
+                        <select id="selectLocal" required>
+                            <option value="">Seleccione Equipo Local</option>
+                            <option value="Colo-Colo">Colo-Colo</option>
+                            <option value="U. de Chile">U. de Chile</option>
+                            <option value="U. Católica">U. Católica</option>
+                            <option value="Cobreloa">Cobreloa</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="selectVisitante">Equipo Visitante</label>
+                        <select id="selectVisitante" required>
+                            <option value="">Seleccione Equipo Visitante</option>
+                            <option value="Colo-Colo">Colo-Colo</option>
+                            <option value="U. de Chile">U. de Chile</option>
+                            <option value="U. Católica">U. Católica</option>
+                            <option value="Cobreloa">Cobreloa</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputFecha">Fecha y Hora</label>
+                        <input type="datetime-local" id="inputFecha" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputLugar">Estadio / Cancha</label>
+                        <input type="text" id="inputLugar" placeholder="Ej: Estadio Monumental" required>
+                    </div>
+
+                    <button type="submit" class="btn-guardar">Crear Partido</button>
+
+                </form>
+            </div>
+        </section>
+
+        <section id="VistaEnVivo" class="vista-content">
+            <div class="card-marcador">
+
+                <span id="periodoPartido" class="badge-tiempo">1T - En Juego</span>
+                <h2 id="cronometroPartido">00:00</h2>
+            </div>
+
+            <div class="marcador-equipos">
+                <div class="equipo-marcador">
+                    <h3 id="marcadorLocalNombre">Equipo Local</h3>
+                    <div class="marcador-goles" id="golesLocal">0</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
 
     <script src="script.js"></script>
-        
 </body>
-
 </html>

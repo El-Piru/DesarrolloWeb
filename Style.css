@@ -1,43 +1,369 @@
-body{
-    background-color: #0f172a;
-    color: #f9fafc;
-    font-family: Arial, sans-serif;
-    padding: 10px;
 
+@media (prefers-color-scheme: light) {
+  :root {
+    --text-50: rgb(242, 242, 242);
+    --text-100: rgb(230, 230, 230);
+    --text-200: rgb(204, 204, 204);
+    --text-300: rgb(179, 179, 179);
+    --text-400: rgb(153, 153, 153);
+    --text-500: rgb(128, 128, 128);
+    --text-600: rgb(102, 102, 102);
+    --text-700: rgb(77, 77, 77);
+    --text-800: rgb(51, 51, 51);
+    --text-900: rgb(26, 26, 26);
+    --text-950: rgb(13, 13, 13);
+
+    --background-50: rgb(251, 233, 241);
+    --background-100: rgb(248, 211, 227);
+    --background-200: rgb(240, 168, 199);
+    --background-300: rgb(233, 124, 171);
+    --background-400: rgb(225, 81, 143);
+    --background-500: rgb(218, 37, 115);
+    --background-600: rgb(174, 30, 92);
+    --background-700: rgb(131, 22, 69);
+    --background-800: rgb(87, 15, 46);
+    --background-900: rgb(44, 7, 23);
+    --background-950: rgb(22, 4, 12);
+
+    --primary-50: rgb(242, 242, 242);
+    --primary-100: rgb(230, 230, 230);
+    --primary-200: rgb(204, 204, 204);
+    --primary-300: rgb(179, 179, 179);
+    --primary-400: rgb(153, 153, 153);
+    --primary-500: rgb(128, 128, 128);
+    --primary-600: rgb(102, 102, 102);
+    --primary-700: rgb(77, 77, 77);
+    --primary-800: rgb(51, 51, 51);
+    --primary-900: rgb(26, 26, 26);
+    --primary-950: rgb(13, 13, 13);
+
+    --secondary-50: rgb(236, 239, 249);
+    --secondary-100: rgb(216, 222, 243);
+    --secondary-200: rgb(178, 189, 230);
+    --secondary-300: rgb(139, 156, 218);
+    --secondary-400: rgb(101, 124, 205);
+    --secondary-500: rgb(62, 91, 193);
+    --secondary-600: rgb(50, 73, 154);
+    --secondary-700: rgb(37, 54, 116);
+    --secondary-800: rgb(25, 36, 77);
+    --secondary-900: rgb(12, 18, 39);
+    --secondary-950: rgb(6, 9, 19);
+
+    --accent-50: rgb(250, 238, 234);
+    --accent-100: rgb(245, 221, 214);
+    --accent-200: rgb(236, 187, 172);
+    --accent-300: rgb(226, 153, 131);
+    --accent-400: rgb(216, 119, 90);
+    --accent-500: rgb(207, 85, 48);
+    --accent-600: rgb(165, 68, 39);
+    --accent-700: rgb(124, 51, 29);
+    --accent-800: rgb(83, 34, 19);
+    --accent-900: rgb(41, 17, 10);
+    --accent-950: rgb(21, 9, 5);
+
+
+    --text: var(--text-950);
+    --background: var(--background-50);
+    --primary: rgb(87, 15, 46);
+    --secondary: #ffffff;
+    --accent: var(--accent-500);
+    --borde: rgba(0, 0, 0, 0.12);
+    --btn-text: #ffffff;
+    --nav-bg: rgba(255, 255, 255, 0.85);
+  }
 }
 
-.tarjeta{
-    background-color: #203a64;
-    color: #f6f6f6;
-    width: 140px;
-    padding: 20px;
-    border-radius: 15px;
-    border: 1px solid #c8cdd4;
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-50: rgb(13, 13, 13);
+    --text-100: rgb(26, 26, 26);
+    --text-200: rgb(51, 51, 51);
+    --text-300: rgb(77, 77, 77);
+    --text-400: rgb(102, 102, 102);
+    --text-500: rgb(128, 128, 128);
+    --text-600: rgb(153, 153, 153);
+    --text-700: rgb(179, 179, 179);
+    --text-800: rgb(204, 204, 204);
+    --text-900: rgb(230, 230, 230);
+    --text-950: rgb(242, 242, 242);
+
+    --background-50: rgb(22, 4, 12);
+    --background-100: rgb(44, 7, 23);
+    --background-200: rgb(87, 15, 46);
+    --background-300: rgb(131, 22, 69);
+    --background-400: rgb(174, 30, 92);
+    --background-500: rgb(218, 37, 115);
+    --background-600: rgb(225, 81, 143);
+    --background-700: rgb(233, 124, 171);
+    --background-800: rgb(240, 168, 199);
+    --background-900: rgb(248, 211, 227);
+    --background-950: rgb(251, 233, 241);
+
+    --primary-50: rgb(13, 13, 13);
+    --primary-100: rgb(26, 26, 26);
+    --primary-200: rgb(51, 51, 51);
+    --primary-300: rgb(77, 77, 77);
+    --primary-400: rgb(102, 102, 102);
+    --primary-500: rgb(128, 128, 128);
+    --primary-600: rgb(153, 153, 153);
+    --primary-700: rgb(179, 179, 179);
+    --primary-800: rgb(204, 204, 204);
+    --primary-900: rgb(230, 230, 230);
+    --primary-950: rgb(242, 242, 242);
+
+    --secondary-50: rgb(6, 9, 19);
+    --secondary-100: rgb(12, 18, 39);
+    --secondary-200: rgb(25, 36, 77);
+    --secondary-300: rgb(37, 54, 116);
+    --secondary-400: rgb(50, 73, 154);
+    --secondary-500: rgb(62, 91, 193);
+    --secondary-600: rgb(101, 124, 205);
+    --secondary-700: rgb(139, 156, 218);
+    --secondary-800: rgb(178, 189, 230);
+    --secondary-900: rgb(216, 222, 243);
+    --secondary-950: rgb(236, 239, 249);
+
+    --accent-50: rgb(21, 9, 5);
+    --accent-100: rgb(41, 17, 10);
+    --accent-200: rgb(83, 34, 19);
+    --accent-300: rgb(124, 51, 29);
+    --accent-400: rgb(165, 68, 39);
+    --accent-500: rgb(207, 85, 48);
+    --accent-600: rgb(216, 119, 90);
+    --accent-700: rgb(226, 153, 131);
+    --accent-800: rgb(236, 187, 172);
+    --accent-900: rgb(245, 221, 214);
+    --accent-950: rgb(250, 238, 234);
+
+    --text: var(--text-950);
+    --background: var(--background-200); 
+    --primary: rgb(255, 255, 255);
+    --secondary: var(--secondary-300);  
+    --accent: var(--accent-600);        
+    --borde: rgba(255, 255, 255, 0.15);
+    --btn-text: var(--background-200);
+    --nav-bg: rgba(0, 0, 0, 0.45);
+  }
 }
 
-.estado{
-    color: #10b981;
-    font-weight: bold;
-    margin-bottom: 15px;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-button{
-    background-color: #3b82f6;
-    color: white;
-    border: none;
-    padding: 10px 15px;
+body {
+    background-color: var(--background);
+    color: var(--text);
+    min-height: 100vh;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--nav-bg);
+    padding: 16px 32px;
+    border-bottom: 1px solid var(--borde);
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo span:first-child {
+    font-size: 1.6rem;
+}
+
+.logo h1 {
+    font-size: 1.7rem;
+    font-weight: 21;
+    letter-spacing: 2px;
+    color: var(--primary);
+}
+
+.logo h1 span {
+    color: var(--accent);
+    font-weight: 500;
+}
+
+.usuario-panel {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.badge {
+    background: var(--secondary);
+    color: var(--text);
+    border: 1px solid var(--borde);
+    padding: 6px 14px;
+    border-radius: 9999px;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+#cambiarRol {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--borde);
+    padding: 6px 12px;
     border-radius: 6px;
     cursor: pointer;
+    font-size: 0.82rem;
+    transition: 0.2s;
 }
 
-button:hover{
-    background-color: #2563eb;
+#cambiarRol:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--primary);
 }
 
-#inputCliente{
-    width: 83%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid #006aff;
+
+.subnav {
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 0 32px;
+    border-bottom: 1px solid var(--borde);
+    gap: 8px;
+    overflow-x: auto;
+}
+
+.nav-link {
+    background: transparent;
+    border: none;
+    color: var(--text);
+    opacity: 0.7;
+    padding: 14px 18px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: 0.2s;
+    white-space: nowrap;
+}
+
+.nav-link:hover {
+    opacity: 1;
+    color: var(--primary);
+}
+
+.nav-link.active {
+    opacity: 1;
+    color: var(--primary);
+    border-bottom: 3px solid var(--accent); 
+}
+
+
+.container {
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.vista-content {
+    display: none;
+}
+
+.vista-content.active {
+    display: block;
+}
+
+
+.card-form {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);         
+    padding: 35px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.15); 
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.card-form h2 {
+    margin-bottom: 25px;
+    color: var(--primary);
+    font-size: 1.35rem;
+    font-weight: 700;
+    border-bottom: 1px solid var(--borde);
+    padding-bottom: 14px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group select {
+    background-color: rgba(0, 0, 0, 0.25);
+    color: var(--primary);
+    border: 1px solid var(--borde);
+    padding: 12px 14px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    width: 100%;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--accent); 
+}
+
+/* BOTÓN CREAR PARTIDO */
+.btn-guardar {
+    background-color: var(--primary);
+    color: var(--btn-text);
+    border: none;
+    padding: 14px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-top: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-guardar:hover {
+    transform: translateY(-2px);
+    background-color: var(--accent);
+    color: white;
+}
+
+
+@media (max-width: 600px) {
+    .navbar {
+        padding: 12px 16px;
+    }
+    .subnav {
+        padding: 0 16px;
+    }
+    .card-form {
+        padding: 24px;
+    }
 }
