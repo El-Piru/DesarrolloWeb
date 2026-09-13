@@ -1,18 +1,30 @@
-const botonesNav = document.querySelectorAll('.nav-link');
+
 const vistas = document.querySelectorAll('.vista-content');
 
-botonesNav.forEach(function(boton) {
+
+function mostrarVista(idVista) {
+    vistas.forEach(function(vista) {
+        vista.classList.remove('active');
+    });
+    const vistaSeleccionada = document.getElementById(idVista);
+    if (vistaSeleccionada) {
+        vistaSeleccionada.classList.add('active');
+    }
+}
+
+
+document.getElementById('btnHubCrearPartido').addEventListener('click', function() {
+    mostrarVista('VistaNuevoPartido');
+});
+
+document.getElementById('btnHubEnVivo').addEventListener('click', function() {
+    mostrarVista('VistaEnVivo');
+});
+
+
+const botonesVolver = document.querySelectorAll('.btn-volver');
+botonesVolver.forEach(function(boton) {
     boton.addEventListener('click', function() {
-
-        botonesNav.forEach(function(b){b.classList.remove('active'); });
-        vistas.forEach(function(v){v.classList.remove('active'); });
-        boton.classList.add('active');
-
-        if(boton.innerText === 'Crear Partido'){
-            doacument.getElementById('VistaNuevoPartido').classlist.add('active');
-        }else if(boton.innerText === 'En Vivo'){
-            document.getElementById('VistaEnVivo').classList.add('active');
-
-        }
+        mostrarVista('VistaInicio');
     });
 });

@@ -408,3 +408,152 @@ body {
         padding: 24px;
     }
 }
+
+.btn-volver{
+    background-color: transparent;
+    color:var(--text);
+    border: 1px solid var(--borde);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight:600;
+    cursor: pointer;
+    margin-bottom: 18px;
+    transition: background-color 0.2s, border-color 0.2s,color 0.2s;
+}
+.btn-volver:hover{
+    background-color: rgba(255,255,255,0.1);
+    border-color: var(--accent);
+    color: var(--primary);
+}
+
+#VistaEnVivo{
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.card-marcador{
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--borde);
+    border-radius: 16px 16px 0 0;
+    padding: 20px;
+    text-align: center;
+}
+
+.badge-tiempo{
+    background-color: var(--accent);
+    color: white;
+    padding: 5px 14px;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 6px;
+}
+
+#cronometroPartido{
+    font-size: 3rem;
+    font-weight: 800;
+    font-family: monospace;
+    letter-spacing: 3px;
+    color: var(--primary);
+
+}
+
+.marcador-equipos{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--borde);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    padding: 20px 10px;
+    margin-bottom: 25px;
+}
+
+.equipo-marcador{
+    flex: 1;
+    text-align: center;
+}
+
+.equipo-marcador h3{
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.marcador-goles{
+    font-size: 3.2rem;
+    font-weight: 900;
+    color: var(--primary);
+    line-height: 1;
+
+}
+
+.marcador-separador{
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--accent);
+    padding: 0 10px;
+}
+
+.acciones-partido{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.btn-accion{
+    padding: 14px 10px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.15s, filter 0.15s;
+
+}
+
+.btn-accion:hover{
+    transform: translateY(-2px);
+    filter: brightness(1.15);
+}
+
+#btnGol{
+    background-color: #2e7d32;
+    color:white;
+    border-color: #4caf50;
+}
+
+.btn-Amarilla{
+    background-color: #f57f17;
+    color: #000000;
+    border-color: #fbc02d;
+}
+
+.btn-Roja{
+    background-color: #c62828;
+    color: white;
+    border-color: #ef5350;
+
+}
+
+.btn-Cambio{
+    background-color: #1565;
+    color: white;
+    border-color: #42a5f5;
+}
+
+.btn-FinalizarPartido{
+    grid-column: span 2;
+    background-color: rgba(0,0,0,0.5);
+}
