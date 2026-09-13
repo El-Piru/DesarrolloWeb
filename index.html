@@ -20,17 +20,45 @@
     </header>
 
 
-    <nav class="subnav">
-        <button class="nav-link active">Crear Partido</button>
-        <button class="nav-link">Partidos</button>
-        <button class="nav-link">En vivo</button>
-        <button class="nav-link">Administrar Equipos</button>
-        <button class="nav-link">Historial Actas</button>
-    </nav>
 
     <main class="container">
 
-        <section id="VistaNuevoPartido" class="vista-content active">
+        <section id="VistaInicio" class="vista-content active">
+            <div class="bienvenida-header">
+                <h2 id="saludoUsuario">!Hola, Extranio¡</h2>
+                <p class="subtitulo-bienvenida">Selecciona una opcion para comenzar</p>
+            </div> 
+
+            <div class="grid-menu-hub">
+                <div class="hub-card" id="btnHubCrearPartido">
+                    <span class="hub-texto">Crear Partidos</span>
+                </div>
+
+                <div class="hub-card" id="btnHubEnVivo">
+                    <span class="hub-texto">Partido en Vivo</span>
+                </div>
+
+                <div class="hub-card" id="btnHubPartidos">
+                    <span class="hub-texto">Ver Partidos</span>
+                </div>
+
+                <div class="hub-card" id="btnHubActas">
+                    <span class="hub-texto">Historial de Actas</span>
+                </div>
+
+                <div class="hub-card" id="btnHubEquipos">
+                    <span class="hub-texto">Equipos y Jugadores</span>
+                </div>
+
+                <div class="hub-card" id="btnHubConfig">
+                    <span class="hub-texto">Configuración</span>
+                </div>
+
+            </div>
+        </section>
+        
+
+        <section id="VistaNuevoPartido" class="vista-content ">
             <div class="card-form">
                 <h2>Crear Nuevo Partido</h2>
                 <form id="formNuevoPartido">
