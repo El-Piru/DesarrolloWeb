@@ -103,24 +103,27 @@
 
         <section id="VistaEnVivo" class="vista-content">
             <button type="button" class="btn-volver">Volver al menu</button>
-            <div class="card-marcador">
+            <div class="tablero-contenedor">
+                <div class="card-marcador">
+            
 
-                <span id="periodoPartido" class="badge-tiempo">1T - En Juego</span>
-                <h2 id="cronometroPartido">00:00</h2>
-            </div>
-
-            <div class="marcador-equipos">
-                <div class="equipo-marcador">
-                    <h3 id="marcadorLocalNombre">Equipo Local: </h3>
-                    <div class="marcador-goles" id="golesLocal">0</div>
+                    <span id="periodoPartido" class="badge-tiempo">1T - En Juego</span>
+                    <h2 id="cronometroPartido">00:00</h2>
+                    <p id="infoPartidoMini" class ="info-partido-mini">Local • Estadio • Visita</p>
                 </div>
-                <span class="marcador-separador">:</span>
-                <div class="equipo-marcador">
-                    <h3 id="marcadorVisitaNombre">Equipo Visitante: </h3>
-                    <div class="marcador-goles" id="golesVisita">0</div>
+
+                <div class="marcador-equipos">
+                    <div class="equipo-marcador">
+                        <h3 id="marcadorLocalNombre">Equipo Local: </h3>
+                        <div class="marcador-goles" id="golesLocal">0</div>
+                    </div>
+                    <span class="marcador-separador">:</span>
+                    <div class="equipo-marcador">
+                        <h3 id="marcadorVisitaNombre">Equipo Visitante: </h3>
+                        <div class="marcador-goles" id="golesVisita">0</div>
+                    </div>
                 </div>
             </div>
-
             <div class="acciones-partido">
                 <button id="btnGol" class ="btn-accion">Gol</button>
                 <button id="btnAmarrilla" class ="btn-accion btn-Amarrilla">Tarjeta Amarilla</button>
@@ -136,7 +139,16 @@
                 </ul>
 
             </div>
-
+            <div id="modalGol" class = "modal-overlay" style="display: none;">
+                <div class="modal-contenido">
+                    <h3>¿Quién anotó el Gol?</h3>
+                    <div class="modal-botones-equipos">
+                        <button type="button" id="btnGolLocal" class="btn-modal-equipo">Equipo Local</button>
+                        <button type="button" id="btnGolVisita" class="btn-modal-equipo">Equpo Visitante</button>
+                    </div>
+                        <button type="button" id="btnCancelarGol" class="btn-modal-cancelar">Cancelar</button>
+                </div>
+            </div>
         </section>
         <section id = "VistaEquipos" class="vista-content">
             <button type ="button" class="btn-volver">Volver al menu</button>
