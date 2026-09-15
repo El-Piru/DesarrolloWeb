@@ -21,6 +21,10 @@ document.getElementById('btnHubEnVivo').addEventListener('click', function() {
     mostrarVista('VistaEnVivo');
 });
 
+document.getElementById('btnHubPartidos').addEventListener('click', function() {
+    mostrarVista('VistaPartidos');
+});
+
 const btnEquipos = document.getElementById('btnHubEquipos');
 if (btnEquipos) {
     btnEquipos.addEventListener('click', function() {
@@ -43,17 +47,33 @@ if (formNuevoPartido) {
 
         const local = document.getElementById('selectLocal').value;
         const visitante = document.getElementById('selectVisitante').value;
+
+        if (local == visitante) {
+            alert('!No se puede crear el partido con el mismo equipo.');
+            return; 
+        }
+
         const estadio = document.getElementById('inputLugar').value || 'Estadio';
+        const fecha = document.getElementById('inputFecha').value || new Date().toLocaleDateString();
 
         const miniLinea= document.getElementById('infoPartidoMini') || document.getElementById('inforPartidaMini');
         if(miniLinea){
             miniLinea.innerText = `${local} • ${estadio} • ${visitante}`;
         }
 
-        if (local == visitante) {
-            alert('!No se puede crear el partido con el mismo equipo.');
-            return; 
+        partidoActivo = {
+            id: Date.now(),
+            local: local,
+            visitante: visitante,
+            estadio: estadio,
+            fecha: fecha,
+            estado: 'En Vivo',
+            golesLocal: 0,
+            golesVisita: 0,
+            incidencias: []
         }
+        historialPartidos.push(partidoActivo);
+
         alert('Partido creado exitosamente!');
 
         document.getElementById('marcadorLocalNombre').innerText = local;
@@ -218,11 +238,117 @@ if (btnCancelarGol) {
     });
 }
 
-const btnHubPartidos = document.getElementById('btnHubPartidos');
+let tipoTarjetaActual='Amarilla';
 
-if (btnHubPartidos) {
-    btnHubPartidos.addEventListener('click', function() {
-        mostrarVista('VistaVerPartidos');
+const modalTarjeta = document.getElementById('modalTarjeta');
+const btnTarjetaLocal= document.getElementById('btnTarjetaLocal');
+const btnTarjetaVisita= document.getElementById('btnTarjetaVisita');
+const btnCancelarTarjeta = document.getElementById('btnCancelarTarjeta');
+const inputJugador= document.getElementById('inputJugadorTarjeta');
+
+function abrirModalTarjeta(tipo, titulo){
+    tipoTarjetaActual = tipo;
+    document.getElementById('tituloModalTarjeta').innerText = titulo;
+
+    const local = document.getElementById('marcadorLocalNombre').innerText;
+    const visitante = document.getElementById('marcadorVisitaNombre').innerText;
+
+    btnTarjetaLocal.innerText = local;
+    btnTarjetaVisita.innerText = visitante;
+    inputJugador.value = '';
+
+    modalTarjeta.style.display = 'flex';
+}
+
+const btnAmarilla = document.getElementById('btnAmarilla');
+if(btnAmarilla){
+    btnAmarilla.addEventListener('click', function(){
+        abrirModalTarjeta('Amarilla', 'Tarjeta Amarilla');
     });
 }
 
+const btnRoja= document.getElementById('btnRoja');
+if(btnRoja){
+    btnRoja.addEventListener('click',function(){
+        abrirModalTarjeta('Roja','Tarjeta Roja');
+    });
+}
+
+if(btnTarjetaLocal){
+    btnTarjetaLocal.addEventListener('click', function(){
+        const local= document.getElementById('marcadorLocalNombre').innerText;
+        const jugador = inputJugador.value.trim();
+        const detalle =  jugador ? ` - ${jugador}` : '';
+        const icono = tipoTarjetaActual === 'Amarilla'  ? '🟨' : '🟥';
+
+
+        registrarIncidencia(`${icono} Tarjeta ${tipoTarjetaActual}: ${local}${detalle}`);
+        modalTarjeta.style.display='none';
+    });
+}
+
+if (btnTarjetaVisita) {
+    btnTarjetaVisita.addEventListener('click', function() {
+        const visitante = document.getElementById('marcadorVisitaNombre').innerText;
+        const jugador = inputJugador.value.trim();
+        const detalle = jugador ? ` - ${jugador}` : '';
+        const icono = tipoTarjetaActual === 'Amarilla' ? '🟨' : '🟥';
+        registrarIncidencia(`${icono} Tarjeta ${tipoTarjetaActual}: ${visitante}${detalle}`);
+        modalTarjeta.style.display = 'none';
+    });
+}
+
+
+if(btnCancelarTarjeta){
+    btnCancelarTarjeta.addEventListener('click',function(){
+        modalTarjeta.style.display = 'none';
+    });
+}
+
+let historialPartidos = [];
+
+const partidoFinalizado = document.getElementById('btnFinalizarPartido');
+if(partidoFinalizado){
+    partidoFinalizado.addEventListener('click', function(){
+        if(!confirm('¿Estás seguro de finalizar el partido?')) return;
+
+        if (typeof intervaloCronometro !== 'undefined') {
+            clearInterval(intervaloCronometro);
+        }
+
+        const displayTiempo = document.getElementById('cronometroPartido');
+        if (displayTiempo) {
+            displayTiempo.textContent = '00:00';
+        }
+
+        partidoActivo.golesLocal = document.getElementById('golesLocal').textContent;
+        partidoActivo.golesVisita = document.getElementById('golesVisita').textContent;
+
+        partidoActivo.estado = 'Finalizado';
+
+        const items = document.querySelectorAll('#ListaEventos li');
+        partidoActivo.incidencias = [];
+        items.forEach(function(item){
+            if (!item.classList.contains('Evento-vacio')){
+                partidoActivo.incidencias.push(item.textContent);
+            }
+        });
+
+        document.getElementById('golesLocal').textContent = '0';
+        document.getElementById('golesVisita').textContent = '0';
+
+        document.getElementById('marcadorLocalNombre').textContent = 'Local';
+        document.getElementById('marcadorVisitaNombre').textContent = 'Visita';
+
+        document.getElementById('infoPartidoMini').textContent = 'Local • Estadio • Visita';
+
+        const listaEventos = document.getElementById('ListaEventos');
+        if (listaEventos) {
+            listaEventos.innerHTML = '<li class="Evento-vacio">No hay incidencias registradas.</li>';
+        }
+
+        alert('El partido ha finalizado.');
+
+        //renderizarVistaPartidos();
+        mostrarVista('VistaInicio');
+})}
