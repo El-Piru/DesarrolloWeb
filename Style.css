@@ -551,7 +551,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover {
     border: 1px solid #030303a9;
 }
 .btn-Amarilla {
-    background: linear-gradient(180deg, #f3a492 0%, rgb(173, 158, 0) 100%);
+    background: linear-gradient(180deg, #f3b2a3 0%, rgb(173, 158, 0) 100%);
     color: #f6f4f4;
     border: 1px solid #060606;
 }
@@ -859,6 +859,7 @@ body.modo-oscuro .equipo-acordeon {
     color: #ffffff !important;
 }
 
+
 #VistaConfig {
     max-width: 520px;
     margin:0 auto;
@@ -915,4 +916,27 @@ body.modo-oscuro .equipo-acordeon {
     height: 20px;
     accent-color: var(--accent);
     cursor: pointer;
+}
+
+.card-admin {
+    border: 1px solid #38bdf8;
+    background: linear-gradient(180deg, rgba(56, 189, 248, 0.25) 0%, rgba(10, 20, 30, 0.7) 100%);
+    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.2);
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.card-admin:hover {
+    transform: translateY(-4px);
+    border-color: #7dd3fc;
+    box-shadow: 0 8px 25px rgba(56, 189, 248, 0.4);
+}
+
+.card-admin-peligro{
+    border: 1px solid rgb(160, 40, 40);
+    background: linear-gradient(180deg, rgb(239, 68, 68)0%,rgba(58, 20, 20, 0.5)100%);
+}
+
+.card-admin-peligro:hover{
+    border-color: #ef4444;
+    box-shadow: 0 8px 20px rgba(239,68,68,0.25);
 }

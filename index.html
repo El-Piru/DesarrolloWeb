@@ -15,7 +15,7 @@
         </div>
         <div class="usuario-panel">
             <span id="userBadge" class="badge">Árbitro: Alonsin</span>
-            <button id="cambiarRol">Cambiar a Admin</button>
+            <button id="cambiarRol">Cerrar Sesión</button>
         </div>
     </header>
 
@@ -23,7 +23,30 @@
 
     <main class="container">
 
-        <section id="VistaInicio" class="vista-content active">
+        <section id="VistaInicioSesión" class="vista-content active">
+            <div class="bienvenida-header">
+                <h2>Bienvenido a Acta Digital</h2>
+                <p class="subtitulo-bienvenida">Inicia sesión para continuar</p>
+            </div> 
+
+            <div class="card-form">
+                <form id="formLogin">
+                    <div class="form-group">
+                        <label for="inputUsuario">Usuario</label>
+                        <input type="text" id="inputUsuario" placeholder="Ingrese su usuario" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputPassword">Contraseña</label>
+                        <input type="password" id="inputPassword" placeholder="Ingrese su contraseña" required>
+                    </div>
+
+                    <button type="submit" class="btn-guardar">Iniciar Sesión</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="VistaMenuArbitro" class="vista-content">
             <div class="bienvenida-header">
                 <h2 id="saludoUsuario">¡Hola, Extraño!</h2>
                 <p class="subtitulo-bienvenida">Selecciona una opcion para comenzar</p>
@@ -54,6 +77,31 @@
                     <span class="hub-texto">Configuración</span>
                 </div>
 
+            </div>
+        </section>
+
+                <section id="VistaMenuAdmin" class="vista-content">
+            <div class="bienvenida-header">
+                <h2>Panel de Administración</h2>
+                <p class="subtitulo-bienvenida">Control Central del Torneo y Árbitros</p>
+            </div>
+            <div class="grid-menu-hub">
+                <div class="hub-card card-admin" id="btnAdminPartidos">
+                  
+                    <span class="hub-texto">Supervisar Partidos</span>
+                </div>
+                <div class="hub-card card-admin" id="btnAdminArbitros">
+                  
+                    <span class="hub-texto">Cuerpo Arbitral</span>
+                </div>
+                <div class="hub-card card-admin" id="btnAdminActas">
+                
+                    <span class="hub-texto">Auditar Actas</span>
+                </div>
+                <div class="hub-card card-admin card-admin-peligro" id="btnAdminReset">
+                    
+                    <span class="hub-texto">Resetear Torneo</span>
+                </div>
             </div>
         </section>
 
