@@ -17,6 +17,21 @@ document.getElementById('btnHubCrearPartido').addEventListener('click', function
     mostrarVista('VistaNuevoPartido');
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    const fechaInput = document.getElementById('inputFecha');
+    if (fechaInput) {
+        const hoy = new Date();
+
+        const year = hoy.getFullYear();
+        const month = String(hoy.getMonth() + 1).padStart(2, '0');
+        const day = String(hoy.getDate()).padStart(2, '0');
+        const hours = String(hoy.getHours()).padStart(2, '0');
+        const minutes = String(hoy.getMinutes()).padStart(2, '0');
+
+        fechaInput.min= `${year}-${month}-${day}T${hours}:${minutes}`;
+    }
+});
+
 document.getElementById('btnHubEnVivo').addEventListener('click', function() {
     mostrarVista('VistaEnVivo');
 });
@@ -56,25 +71,50 @@ if (formNuevoPartido) {
         const estadio = document.getElementById('inputLugar').value || 'Estadio';
         const fecha = document.getElementById('inputFecha').value || new Date().toLocaleDateString();
 
-        const miniLinea= document.getElementById('infoPartidoMini') || document.getElementById('inforPartidaMini');
-        if(miniLinea){
-            miniLinea.innerText = `${local} • ${estadio} • ${visitante}`;
-        }
+        const hoy = new Date();
+        hoy.setSeconds(0, 0);
+
+        const fechaPartido = fecha ? new Date(fecha) : hoy;
+
+        
+        const esProgramado = fechaPartido > hoy;
+        const estadoInicial = esProgramado ? 'Programado' : 'En Vivo';
+
+        const fechaFormateada = fechaPartido.toLocaleDateString([], {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hours: '2-digit',
+            minutes: '2-digit'
+        });
 
         partidoActivo = {
             id: Date.now(),
             local: local,
             visitante: visitante,
             estadio: estadio,
-            fecha: fecha,
-            estado: 'En Vivo',
+            fecha: fechaFormateada,
+            estado: estadoInicial,
             golesLocal: 0,
             golesVisita: 0,
             incidencias: []
         }
         historialPartidos.push(partidoActivo);
 
-        alert('Partido creado exitosamente!');
+        if (esProgramado) {
+            alert(`Partido programado para el ${fechaPartido}.`);
+            partidoActual = null;
+            formNuevoPartido.reset();
+            renderizarVistaPartidos();
+            mostrarVista('VistaPartidos');
+            return;
+        }
+
+        const miniLinea= document.getElementById('infoPartidoMini') || document.getElementById('inforPartidaMini');
+        if(miniLinea){
+            miniLinea.innerText = `${local} • ${estadio} • ${visitante}`;
+        }
+
 
         document.getElementById('marcadorLocalNombre').innerText = local;
         document.getElementById('marcadorVisitaNombre').innerText = visitante;
@@ -83,7 +123,7 @@ if (formNuevoPartido) {
         document.getElementById('golesVisita').innerText = '0';
 
         iniciarCronometro();
-
+        alert('Partido en vivo iniciado entre ' + local + ' y ' + visitante + '!');
         formNuevoPartido.reset();
         mostrarVista('VistaEnVivo');
     }); 
@@ -387,7 +427,7 @@ if(partidoFinalizado){
 
         alert('El partido ha finalizado.');
 
-        //renderizarVistaPartidos();
+        renderizarVistaPartidos();
         mostrarVista('VistaInicio');
 })}
 
