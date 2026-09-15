@@ -79,6 +79,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    const fechaInput = document.getElementById('inputFecha');
+    if (fechaInput) {
+        const hoy = new Date();
+
+        const year = hoy.getFullYear();
+        const month = String(hoy.getMonth() + 1).padStart(2, '0');
+        const day = String(hoy.getDate()).padStart(2, '0');
+        const hours = String(hoy.getHours()).padStart(2, '0');
+        const minutes = String(hoy.getMinutes()).padStart(2, '0');
+
+        fechaInput.min= `${year}-${month}-${day}T${hours}:${minutes}`;
+    }
+});
+
 document.getElementById('btnHubEnVivo').addEventListener('click', function() {
     mostrarVista('VistaEnVivo');
 });
@@ -142,9 +157,9 @@ if (formNuevoPartido) {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        }).replace(',', '');
+            hours: '2-digit',
+            minutes: '2-digit'
+        });
 
         partidoActivo = {
             id: Date.now(),
@@ -463,6 +478,8 @@ if(partidoFinalizado){
 
         partido.golesLocal = document.getElementById('golesLocal').textContent;
         partido.golesVisita = document.getElementById('golesVisita').textContent;
+        partido.golesLocal = document.getElementById('golesLocal').textContent;
+        partido.golesVisita = document.getElementById('golesVisita').textContent;
 
         partido.estado = 'Finalizado';
 
@@ -511,6 +528,151 @@ if (btnGuardarConfig) {
     });
 }
  
+const btnActas = document.getElementById('btnHubActas');
+if (btnActas) {
+    btnActas.addEventListener('click', function() {
+        mostrarVista('VistaActas');
+        renderizarActas();
+    });
+}
+
+
+function renderizarVistaPartidos() {
+    const lista = document.getElementById('listaPartidos');
+    if (!lista) return;
+    
+    lista.innerHTML = '';
+
+    historialPartidos.forEach(p => {
+        const item = document.createElement('li');
+        item.className = 'tarjeta-partido';
+
+        const divInfo = document.createElement('div');
+        divInfo.className = 'InfoPartido';
+
+        const spanEstadio = document.createElement('span');
+        spanEstadio.className = 'estadio';
+        spanEstadio.textContent = p.estadio;
+
+        const spanFecha = document.createElement('span');
+        spanFecha.className = 'fecha';
+        spanFecha.textContent = p.fecha;
+
+        divInfo.appendChild(spanEstadio);
+        divInfo.appendChild(spanFecha);
+
+        const divLocal = document.createElement('div');
+        divLocal.className = 'Local';
+        divLocal.textContent = p.local;
+
+        const divEstado = document.createElement('div');
+        divEstado.className = 'estado';
+        
+        const strongVs = document.createElement('strong');
+        strongVs.textContent = 'VS';
+
+        const smallEstado = document.createElement('small');
+        smallEstado.textContent = p.estado;
+
+        divEstado.appendChild(strongVs);
+        divEstado.appendChild(smallEstado);
+
+        const divVisita = document.createElement('div');
+        divVisita.className = 'Visitante';
+        divVisita.textContent = p.visitante;
+
+        const divGolesLocal = document.createElement('div');
+        divGolesLocal.className = 'golesLocal';
+        divGolesLocal.textContent = p.golesLocal;
+
+        const divGolesVisita = document.createElement('div');
+        divGolesVisita.className = 'golesVisita';
+        divGolesVisita.textContent = p.golesVisita;
+
+        item.appendChild(divInfo);
+        item.appendChild(divLocal);
+        item.appendChild(divEstado);
+        item.appendChild(divVisita);
+        item.appendChild(divGolesLocal);
+        item.appendChild(divGolesVisita);
+
+        lista.appendChild(item);
+})}
+
+function finalizarPartido() {
+    if (!hayPartidoActivo()) return alert('No hay un partido activo.');
+    if (!confirm('¿Deseas finalizar el partido y generar el acta?')) return;
+
+    const partido = obtenerPartidoActivo();
+    clearInterval(intervaloCronometro);
+
+    partido.golesLocal = document.getElementById('golesLocal').textContent;
+    partido.golesVisita = document.getElementById('golesVisita').textContent;
+    partido.estado = 'Finalizado';
+
+    const elementosIncidencias = document.querySelectorAll('#ListaEventos li');
+    partido.incidencias = [];
+
+    elementosIncidencias.forEach(item => {
+        if (!item.classList.contains('Evento-vacio')) {
+            partido.incidencias.push(item.textContent);
+        }
+    });
+
+    alert('Partido finalizado correctamente. El acta ha sido generada.');
+    partidoEnVivo = null;
+    mostrarVista('VistaInicio');
+} 
+
+function renderizarActas() {
+
+    const contenedor = document.getElementById("contenedorActas");
+
+    if (!contenedor) {
+        return;
+    }
+
+    contenedor.innerHTML = "";
+
+    const partidosFinalizados = historialPartidos.filter(function(partido) {
+        return partido.estado === "Finalizado";
+    });
+
+    if (partidosFinalizados.length === 0) {
+        contenedor.innerHTML = "<p>No hay actas de partidos finalizados aún.</p>";
+        return;
+    }
+
+    partidosFinalizados.forEach(function(partido) {
+
+        const tarjeta = document.createElement("div");
+        tarjeta.className = "acta-card";
+
+        let incidencias = "";
+
+        if (partido.incidencias.length === 0) {
+
+            incidencias = "<li>Sin incidencias registradas</li>";
+
+        } else {
+
+            partido.incidencias.forEach(function(incidencia) {
+                incidencias += "<li>" + incidencia + "</li>";
+            });
+
+        }
+
+        tarjeta.innerHTML =
+            "<h3>" + partido.local + " VS " + partido.visitante + "</h3>" +
+            "<p>Fecha: " + partido.fecha + "</p>" +
+            "<p>Estadio: " + partido.estadio + "</p>" +
+            "<p>Resultado: " + partido.golesLocal + " - " + partido.golesVisita + "</p>" +
+            "<h4>Incidencias:</h4>" +
+            "<ul>" + incidencias + "</ul>";
+
+        contenedor.appendChild(tarjeta);
+    });
+}
 
 
 function renderizarVistaPartidos() {
