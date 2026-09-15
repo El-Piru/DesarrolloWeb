@@ -95,9 +95,9 @@ if (formNuevoPartido) {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric',
-            hours: '2-digit',
-            minutes: '2-digit'
-        });
+            hour: '2-digit',
+            minute: '2-digit'
+        }).replace(',','');
 
         partidoActivo = {
             id: Date.now(),
