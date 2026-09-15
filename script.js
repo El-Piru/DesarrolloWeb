@@ -91,13 +91,13 @@ if (formNuevoPartido) {
             return;
         }
 
-        const fechaFormateada = fechaPartido.toLocaleDateString([], {
+        const fechaFormateada = fechaPartido.toLocaleString([], {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric',
             hour: '2-digit',
             minute: '2-digit'
-        }).replace(',','');
+        }).replace(',', '');
 
         partidoActivo = {
             id: Date.now(),
@@ -451,16 +451,21 @@ function obtenerPartidoActivo() {
 }
 
 const btnGuardarConfig = document.getElementById('btnGuardarConfig');
-
 if (btnGuardarConfig) {
     btnGuardarConfig.addEventListener('click', function() {
-
-        const nombre = document.getElementById('nombreArbitro').value;
-
-        document.getElementById('userBadge').innerText =
-            `Árbitro: ${nombre}`;
-
-        alert('Configuración guardada correctamente.');
+        const nombre = document.getElementById('nombreArbitro').value.trim();
+        if (!nombre) {
+            alert('Por favor, ingresa un nombre válido.');
+            return;
+        }
+        document.getElementById('userBadge').innerText = `Árbitro: ${nombre}`;
+        const saludo = document.getElementById('saludoUsuario');
+        if (saludo) {
+            saludo.innerText = `¡Hola, ${nombre}!`;
+        }
+        localStorage.setItem('nombreArbitroGuardado', nombre);
+        alert('¡Configuración y perfil guardados correctamente!');
+        mostrarVista('VistaInicio');
     });
 }
 
