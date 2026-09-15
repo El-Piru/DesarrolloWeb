@@ -790,6 +790,63 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover {
     margin-top: 10px;
 }
 
+.lista-partidos li{
+    display: grid;
+    grid-template-areas:
+        "info info info"
+        "local estado visitante"
+        "golLocal . golVisitante";
+    gap: 12px;
+    padding: 16px;
+    border: 2px solid var(--borde);
+    border-radius: 8px;
+    margin-bottom: 12px;
+    list-style: none;
+    box-shadow: 4px 4px 12px rgba(244, 6, 58, 0.4);
+}
+
+.InfoPartido{
+    grid-area: info;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.Local{
+    grid-area: local;
+    text-align: left;
+    font-weight: bold;
+}
+
+.estado{
+    grid-area: estado;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Visitante{
+    grid-area: visitante;
+    text-align: right;
+    font-weight: bold;
+}
+
+.golesLocal{
+    grid-area: golLocal;
+    text-align: left;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.golesVisita{
+    grid-area: golVisitante;
+    text-align: right;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
 body.modo-oscuro {
     background-color: #121212 !important;
     color: #ffffff !important;
