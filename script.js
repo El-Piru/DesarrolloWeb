@@ -59,6 +59,8 @@ botonesVolver.forEach(function(boton) {
     });
 });
 
+let partidoEnVivo = null;
+
 const formNuevoPartido = document.getElementById('formNuevoPartido');
 if (formNuevoPartido) {
     formNuevoPartido.addEventListener('submit', function(e) {
@@ -83,6 +85,11 @@ if (formNuevoPartido) {
         
         const esProgramado = fechaPartido > hoy;
         const estadoInicial = esProgramado ? 'Programado' : 'En Vivo';
+
+        if(hayPartidoActivo() && !esProgramado) {
+            alert('Ya hay un partido en vivo. Finalízalo antes de iniciar otro.');
+            return;
+        }
 
         const fechaFormateada = fechaPartido.toLocaleDateString([], {
             day: '2-digit',
@@ -127,6 +134,7 @@ if (formNuevoPartido) {
         document.getElementById('golesVisita').innerText = '0';
 
         iniciarCronometro();
+        partidoEnVivo = partidoActivo.id;
         alert('Partido en vivo iniciado entre ' + local + ' y ' + visitante + '!');
         formNuevoPartido.reset();
         renderizarVistaPartidos();
@@ -380,7 +388,7 @@ if(btnCancelarTarjeta){
 }
 
 function hayPartidoActivo() {
-    return partidoActivo && partidoActivo.estado === 'En Vivo';
+    return obtenerPartidoActivo() !== null;
 }
 
 let historialPartidos = [];
@@ -395,6 +403,8 @@ if(partidoFinalizado){
         
         if(!confirm('¿Estás seguro de finalizar el partido?')) return;
 
+        const partido = obtenerPartidoActivo();
+
         if (typeof intervaloCronometro !== 'undefined') {
             clearInterval(intervaloCronometro);
         }
@@ -404,16 +414,16 @@ if(partidoFinalizado){
             displayTiempo.textContent = '00:00';
         }
 
-        partidoActivo.golesLocal = document.getElementById('golesLocal').textContent;
-        partidoActivo.golesVisita = document.getElementById('golesVisita').textContent;
+        partido.golesLocal = document.getElementById('golesLocal').textContent;
+        partido.golesVisita = document.getElementById('golesVisita').textContent;
 
-        partidoActivo.estado = 'Finalizado';
+        partido.estado = 'Finalizado';
 
         const items = document.querySelectorAll('#ListaEventos li');
-        partidoActivo.incidencias = [];
+        partido.incidencias = [];
         items.forEach(function(item){
             if (!item.classList.contains('Evento-vacio')){
-                partidoActivo.incidencias.push(item.textContent);
+                partido.incidencias.push(item.textContent);
             }
         });
 
@@ -435,6 +445,10 @@ if(partidoFinalizado){
         renderizarVistaPartidos();
         mostrarVista('VistaInicio');
 })}
+
+function obtenerPartidoActivo() {
+    return historialPartidos.find(p => p.id === partidoEnVivo && p.estado === 'En Vivo') || null;
+}
 
 const btnGuardarConfig = document.getElementById('btnGuardarConfig');
 
