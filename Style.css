@@ -372,7 +372,7 @@ body {
     border-color: var(--accent); 
 }
 
-/* BOTÓN CREAR PARTIDO */
+/* BOTON CREAR PARTIDO */
 .btn-guardar {
     background-color: var(--primary);
     color: var(--btn-text);
@@ -534,30 +534,25 @@ body {
     filter: brightness(1.15);
 }
 
-#btnGol{
-    background-color: #145b98;
-    color:white;
-    border-color: #b9ada3;
-
+#btnGol {
+    background: linear-gradient(180deg, #ebeae598 0%, #facc15bf 95%);
+    color: #faf8f8;
+    border: 1px solid #d1d5db;
 }
-
-.btn-Amarilla{
-    background-color: #e2fd14;
-    color: #000000;
-    border-color: #fbc02d;
+.btn-Cambio {
+    background: linear-gradient(180deg, #ebeae598 0%, #dc2626bf 95%);
+    color: #f8f3f3;
+    border: 1px solid #981d3aa9;
 }
-
-.btn-Roja{
-    background-color: #c62828;
-    color: white;
-    border-color: #ef5350;
-
+.btn-Amarilla {
+    background: linear-gradient(180deg, #facc15 0%, #b45309 100%);
+    color: #f6f4f4;
+    border: 1px solid #d97706;
 }
-
-.btn-Cambio{
-    background-color: #1a7c8d;
-    color: white;
-    border-color: #676a77;
+.btn-Roja {
+    background: linear-gradient(180deg, #dc2626 0%, #6b1111 100%);
+    color: #fbfafa;
+    border: 1px solid #991b1b;
 }
 
 .btn-FinalizarPartido{
