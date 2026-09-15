@@ -370,4 +370,55 @@ if (btnGuardarConfig) {
         alert('Configuración guardada correctamente.');
     });
 }
+
  
+const btnCambio= document.getElementById('btnCambio');
+const modalCambio = document.getElementById('modalCambio');
+const inputJugadorSale=document.getElementById('inputJugadorSale');
+const inputJugadorEntra = document.getElementById('inputJugadorEntra');
+const btnCambioLocal = document.getElementById('btnCambioLocal');
+const btnCambioVisita = document.getElementById('btnCambioVisita');
+const btnCancelarCambio = document.getElementById('btnCancelarCambio');
+
+if (btnCambio){
+    btnCambio.addEventListener('click' , function() {
+        const local = document.getElementById('marcadorLocalNombre').innerText;
+        const visitante = document.getElementById('marcadorVisitaNombre').innerText;
+
+        btnCambioLocal.innerText = local;
+        btnCambioVisita.innerText = visitante;
+
+        inputJugadorSale.value = '';
+        inputJugadorEntra.value = '';
+
+        modalCambio.style.display = 'flex';
+    });
+}
+
+if(btnCambioLocal){
+    btnCambioLocal.addEventListener('click' , function(){
+        const Local = document.getElementById('marcadorLocalNombre').innerText;
+        const sale = inputJugadorSale.value.trim() || 'Jugador';
+        const entra = inputJugadorEntra.value.trim() || 'Jugador';
+
+        registrarIncidencia(`Cambio en ${Local}: Sale ${sale} -> entra ${entra}`);
+        modalCambio.style.display = 'none';
+    });
+}
+
+if(btnCambioVisita){
+    btnCambioVisita.addEventListener('click' , function(){
+        const visitante = document.getElementById('marcadorVisitaNombre').innerText;
+        const sale = inputJugadorSale.value.trim() || 'Jugador';
+        const entra = inputJugadorEntra.value.trim() || 'Jugador';
+
+        registrarIncidencia(`Cambio en ${visitante}: Sale ${sale} -> entra ${entra}`);
+        modalCambio.style.display = 'none';
+    });
+}
+
+if(btnCancelarCambio){
+    btnCancelarCambio.addEventListener('click',function(){
+        modalCambio.style.display = 'none';
+    })
+}

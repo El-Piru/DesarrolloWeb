@@ -328,6 +328,7 @@ body {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
     max-width: 520px;
     margin: 0 auto;
+
 }
 
 .card-form h2 {
@@ -542,7 +543,7 @@ body {
 .btn-Cambio {
     background: linear-gradient(180deg, #ebeae598 0%, #dc2626bf 95%);
     color: #f8f3f3;
-    border: 1px solid #981d3aa9;
+    border: 1px solid #f6eff1a9;
 }
 .btn-Amarilla {
     background: linear-gradient(180deg, #facc15 0%, #b45309 100%);
