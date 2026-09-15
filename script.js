@@ -371,3 +371,9 @@ if (btnGuardarConfig) {
     });
 }
  
+const btnActas = document.getElementById('btnHubActas');
+if (btnActas) {
+    btnActas.addEventListener('click', function() {
+        mostrarVista('VistaActas');
+    });
+}
