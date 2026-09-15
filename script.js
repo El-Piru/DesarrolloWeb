@@ -490,7 +490,7 @@ if(partidoFinalizado){
         alert('El partido ha finalizado.');
 
         renderizarVistaPartidos();
-        mostrarVista('VistaInicio');
+        mostrarVista('VistaMenuArbitro');
 })}
 
 function obtenerPartidoActivo() {
