@@ -10,8 +10,23 @@ function mostrarVista(idVista) {
     if (vistaSeleccionada) {
         vistaSeleccionada.classList.add('active');
     }
+
+    const botones = document.querySelector('.usuario-panel');
+    if (botones){
+        if (idVista === 'VistaInicioSesión'){
+            botones.style.display = 'none'; 
+        }
+        else {
+            botones.style.display = 'flex';
+        }
+    }
 }
 
+document.addEventListener('DOMContentLoaded', mostrarVista('VistaInicioSesión'));
+
+document.getElementById('cambiarRol').addEventListener('click', function () {
+    mostrarVista('VistaInicioSesión');
+})
 
 document.getElementById('btnHubCrearPartido').addEventListener('click', function() {
     mostrarVista('VistaNuevoPartido');
