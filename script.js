@@ -106,7 +106,7 @@ if (formNuevoPartido) {
         historialPartidos.push(partidoActivo);
 
         if (esProgramado) {
-            alert(`Partido programado para el ${fechaPartido}.`);
+            alert(`Partido programado para el ${fechaFormateada}.`);
             partidoActual = null;
             formNuevoPartido.reset();
             renderizarVistaPartidos();
@@ -129,6 +129,7 @@ if (formNuevoPartido) {
         iniciarCronometro();
         alert('Partido en vivo iniciado entre ' + local + ' y ' + visitante + '!');
         formNuevoPartido.reset();
+        renderizarVistaPartidos();
         mostrarVista('VistaEnVivo');
     }); 
 }
@@ -457,5 +458,58 @@ function renderizarVistaPartidos() {
     
     lista.innerHTML = '';
 
-    if (historialPartidos.length === 0) {
-}}
+    historialPartidos.forEach(p => {
+        const item = document.createElement('li');
+        item.className = 'tarjeta-partido';
+
+        const divInfo = document.createElement('div');
+        divInfo.className = 'InfoPartido';
+
+        const spanEstadio = document.createElement('span');
+        spanEstadio.className = 'estadio';
+        spanEstadio.textContent = p.estadio;
+
+        const spanFecha = document.createElement('span');
+        spanFecha.className = 'fecha';
+        spanFecha.textContent = p.fecha;
+
+        divInfo.appendChild(spanEstadio);
+        divInfo.appendChild(spanFecha);
+
+        const divLocal = document.createElement('div');
+        divLocal.className = 'Local';
+        divLocal.textContent = p.local;
+
+        const divEstado = document.createElement('div');
+        divEstado.className = 'estado';
+        
+        const strongVs = document.createElement('strong');
+        strongVs.textContent = 'VS';
+
+        const smallEstado = document.createElement('small');
+        smallEstado.textContent = p.estado;
+
+        divEstado.appendChild(strongVs);
+        divEstado.appendChild(smallEstado);
+
+        const divVisita = document.createElement('div');
+        divVisita.className = 'Visitante';
+        divVisita.textContent = p.visitante;
+
+        const divGolesLocal = document.createElement('div');
+        divGolesLocal.className = 'golesLocal';
+        divGolesLocal.textContent = p.golesLocal;
+
+        const divGolesVisita = document.createElement('div');
+        divGolesVisita.className = 'golesVisita';
+        divGolesVisita.textContent = p.golesVisita;
+
+        item.appendChild(divInfo);
+        item.appendChild(divLocal);
+        item.appendChild(divEstado);
+        item.appendChild(divVisita);
+        item.appendChild(divGolesLocal);
+        item.appendChild(divGolesVisita);
+
+        lista.appendChild(item);
+})}
