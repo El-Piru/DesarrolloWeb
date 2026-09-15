@@ -367,13 +367,17 @@ body {
     transition: border-color 0.2s;
     
 }
-
-.form-group input:focus,
-.form-group select:focus {
-    outline: none;
-    border-color: var(--accent); 
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+    transform: scale(1.15);
+    transition: transform 0.15s, opacity 0.15s;
 }
-
+input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+    transform: scale(1.25);
+}
 /* BOTON CREAR PARTIDO */
 .btn-guardar {
     background-color: var(--primary);
