@@ -40,6 +40,10 @@ document.getElementById('btnHubPartidos').addEventListener('click', function() {
     mostrarVista('VistaPartidos');
 });
 
+document.getElementById('btnHubConfig')?.addEventListener('click', function() {
+    mostrarVista('VistaConfig');
+});
+
 const btnEquipos = document.getElementById('btnHubEquipos');
 if (btnEquipos) {
     btnEquipos.addEventListener('click', function() {
@@ -430,6 +434,22 @@ if(partidoFinalizado){
         renderizarVistaPartidos();
         mostrarVista('VistaInicio');
 })}
+
+const btnGuardarConfig = document.getElementById('btnGuardarConfig');
+
+if (btnGuardarConfig) {
+    btnGuardarConfig.addEventListener('click', function() {
+
+        const nombre = document.getElementById('nombreArbitro').value;
+
+        document.getElementById('userBadge').innerText =
+            `Árbitro: ${nombre}`;
+
+        alert('Configuración guardada correctamente.');
+    });
+}
+ 
+
 
 function renderizarVistaPartidos() {
     const lista = document.getElementById('listaPartidos');
