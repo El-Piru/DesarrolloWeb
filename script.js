@@ -204,6 +204,11 @@ const btnCancelarGol = document.getElementById('btnCancelarGol');
 
 if (btnGol) {
     btnGol.addEventListener('click', function() {
+        if (!hayPartidoActivo()) {
+            alert('No hay un partido activo en este momento.');
+            return;
+        }
+
         const local = document.getElementById('marcadorLocalNombre').innerText;
         const visitante = document.getElementById('marcadorVisitaNombre').innerText;
         btnGolLocal.innerText = `Gol de ${local}`;
@@ -214,6 +219,11 @@ if (btnGol) {
 
 if (btnGolLocal) {
     btnGolLocal.addEventListener('click', function() {
+        if (!hayPartidoActivo()) {
+            alert('No hay un partido activo en este momento.');
+            return;
+        }
+
         const local = document.getElementById('marcadorLocalNombre').innerText;
         const golesActuales = parseInt(document.getElementById('golesLocal').innerText) || 0;
         document.getElementById('golesLocal').innerText = golesActuales + 1;
@@ -224,6 +234,11 @@ if (btnGolLocal) {
 
 if (btnGolVisita) {
     btnGolVisita.addEventListener('click', function() {
+        if (!hayPartidoActivo()) {
+            alert('No hay un partido activo en este momento.');
+            return;
+        }
+
         const visitante = document.getElementById('marcadorVisitaNombre').innerText;
         const golesActuales = parseInt(document.getElementById('golesVisita').innerText) || 0;
         document.getElementById('golesVisita').innerText = golesActuales + 1;
@@ -234,6 +249,10 @@ if (btnGolVisita) {
 
 if (btnCancelarGol) {
     btnCancelarGol.addEventListener('click', function() {
+        if (!hayPartidoActivo()) {
+            alert('No hay un partido activo en este momento.');
+            return;
+        }
         modalGol.style.display = 'none';
     });
 }
@@ -263,6 +282,11 @@ function abrirModalTarjeta(tipo, titulo){
 const btnAmarilla = document.getElementById('btnAmarilla');
 if(btnAmarilla){
     btnAmarilla.addEventListener('click', function(){
+        if (!hayPartidoActivo()) {
+            alert('No hay un partido activo en este momento.');
+            return;
+        }
+
         abrirModalTarjeta('Amarilla', 'Tarjeta Amarilla');
     });
 }
@@ -270,6 +294,11 @@ if(btnAmarilla){
 const btnRoja= document.getElementById('btnRoja');
 if(btnRoja){
     btnRoja.addEventListener('click',function(){
+        if (!hayPartidoActivo()) {
+            alert('No hay un partido activo en este momento.');
+            return;
+        }
+
         abrirModalTarjeta('Roja','Tarjeta Roja');
     });
 }
@@ -305,11 +334,20 @@ if(btnCancelarTarjeta){
     });
 }
 
+function hayPartidoActivo() {
+    return partidoActivo && partidoActivo.estado === 'En Vivo';
+}
+
 let historialPartidos = [];
 
 const partidoFinalizado = document.getElementById('btnFinalizarPartido');
 if(partidoFinalizado){
     partidoFinalizado.addEventListener('click', function(){
+        if (!hayPartidoActivo()) {
+            alert('No hay un partido activo en este momento.');
+            return;
+        }
+        
         if(!confirm('¿Estás seguro de finalizar el partido?')) return;
 
         if (typeof intervaloCronometro !== 'undefined') {
@@ -352,3 +390,12 @@ if(partidoFinalizado){
         //renderizarVistaPartidos();
         mostrarVista('VistaInicio');
 })}
+
+function renderizarVistaPartidos() {
+    const lista = document.getElementById('listaPartidos');
+    if (!lista) return;
+    
+    lista.innerHTML = '';
+
+    if (historialPartidos.length === 0) {
+}}
