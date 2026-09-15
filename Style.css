@@ -541,24 +541,24 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover {
 }
 
 #btnGol {
-    background: linear-gradient(180deg, #ebeae598 0%, #facc15bf 95%);
+    background: linear-gradient(180deg, #f3a492 0%, rgba(0, 0, 0, 0.415) 95%);
     color: #faf8f8;
-    border: 1px solid #d1d5db;
+    border: 1px solid #010101;
 }
 .btn-Cambio {
-    background: linear-gradient(180deg, #ebeae598 0%, #dc2626bf 95%);
+    background: linear-gradient(180deg, #f3a492 0%, rgba(0,0,0,0.415) 95%);
     color: #f8f3f3;
-    border: 1px solid #f6eff1a9;
+    border: 1px solid #030303a9;
 }
 .btn-Amarilla {
-    background: linear-gradient(180deg, #facc15 0%, #b45309 100%);
+    background: linear-gradient(180deg, #f3a492 0%, rgb(173, 158, 0) 100%);
     color: #f6f4f4;
-    border: 1px solid #d97706;
+    border: 1px solid #060606;
 }
 .btn-Roja {
-    background: linear-gradient(180deg, #dc2626 0%, #6b1111 100%);
+    background: linear-gradient(180deg, #f3a492 0%, rgb(110, 2, 2) 100%);
     color: #fbfafa;
-    border: 1px solid #991b1b;
+    border: 1px solid #060606;
 }
 
 .btn-FinalizarPartido{
