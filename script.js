@@ -218,69 +218,11 @@ if (btnCancelarGol) {
     });
 }
 
-let tipoTarjetaActual='Amarilla';
+const btnHubPartidos = document.getElementById('btnHubPartidos');
 
-const modalTarjeta = document.getElementById('modalTarjeta');
-const btnTarjetaLocal= document.getElementById('btnTarjetaLocal');
-const btnTarjetaVisita= document.getElementById('btnTarjetaVisita');
-const btnCancelarTarjeta = document.getElementById('btnCancelarTarjeta');
-const inputJugador= document.getElementById('inputJugadorTarjeta');
-
-function abrirModalTarjeta(tipo, titulo){
-    tipoTarjetaActual = tipo;
-    document.getElementById('tituloModalTarjeta').innerText = titulo;
-
-    const local = document.getElementById('marcadorLocalNombre').innerText;
-    const visitante = document.getElementById('marcadorVisitaNombre').innerText;
-
-    btnTarjetaLocal.innerText = local;
-    btnTarjetaVisita.innerText = visitante;
-    inputJugador.value = '';
-
-    modalTarjeta.style.display = 'flex';
-}
-
-const btnAmarilla = document.getElementById('btnAmarilla');
-if(btnAmarilla){
-    btnAmarilla.addEventListener('click', function(){
-        abrirModalTarjeta('Amarilla', 'Tarjeta Amarilla');
+if (btnHubPartidos) {
+    btnHubPartidos.addEventListener('click', function() {
+        mostrarVista('VistaVerPartidos');
     });
 }
 
-const btnRoja= document.getElementById('btnRoja');
-if(btnRoja){
-    btnRoja.addEventListener('click',function(){
-        abrirModalTarjeta('Roja','Tarjeta Roja');
-    });
-}
-
-if(btnTarjetaLocal){
-    btnTarjetaLocal.addEventListener('click', function(){
-        const local= document.getElementById('marcadorLocalNombre').innerText;
-        const jugador = inputJugador.value.trim();
-        const detalle =  jugador ? ` - ${jugador}` : '';
-        const icono = tipoTarjetaActual === 'Amarilla'  ? '🟨' : '🟥';
-
-
-        registrarIncidencia(`${icono} Tarjeta ${tipoTarjetaActual}: ${local}${detalle}`);
-        modalTarjeta.style.display='none';
-    });
-}
-
-if (btnTarjetaVisita) {
-    btnTarjetaVisita.addEventListener('click', function() {
-        const visitante = document.getElementById('marcadorVisitaNombre').innerText;
-        const jugador = inputJugador.value.trim();
-        const detalle = jugador ? ` - ${jugador}` : '';
-        const icono = tipoTarjetaActual === 'Amarilla' ? '🟨' : '🟥';
-        registrarIncidencia(`${icono} Tarjeta ${tipoTarjetaActual}: ${visitante}${detalle}`);
-        modalTarjeta.style.display = 'none';
-    });
-}
-
-
-if(btnCancelarTarjeta){
-    btnCancelarTarjeta.addEventListener('click',function(){
-        modalTarjeta.style.display = 'none';
-    });
-}
