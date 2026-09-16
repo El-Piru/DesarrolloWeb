@@ -22,11 +22,13 @@ function mostrarVista(idVista) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', mostrarVista('VistaInicioSesión'));
-
-document.getElementById('cambiarRol').addEventListener('click', function () {
+document.addEventListener('DOMContentLoaded', function() {
     mostrarVista('VistaInicioSesión');
-})
+});
+
+document.getElementById('cambiarRol').addEventListener('click', function() {
+    mostrarVista('VistaInicioSesión');
+});
 
 document.getElementById('btnHubCrearPartido').addEventListener('click', function() {
     mostrarVista('VistaNuevoPartido');
@@ -503,8 +505,6 @@ if(partidoFinalizado){
 
         partido.golesLocal = document.getElementById('golesLocal').textContent;
         partido.golesVisita = document.getElementById('golesVisita').textContent;
-        partido.golesLocal = document.getElementById('golesLocal').textContent;
-        partido.golesVisita = document.getElementById('golesVisita').textContent;
 
         partido.estado = 'Finalizado';
 
@@ -630,30 +630,6 @@ function renderizarVistaPartidos() {
         lista.appendChild(item);
 })}
 
-function finalizarPartido() {
-    if (!hayPartidoActivo()) return alert('No hay un partido activo.');
-    if (!confirm('¿Deseas finalizar el partido y generar el acta?')) return;
-
-    const partido = obtenerPartidoActivo();
-    clearInterval(intervaloCronometro);
-
-    partido.golesLocal = document.getElementById('golesLocal').textContent;
-    partido.golesVisita = document.getElementById('golesVisita').textContent;
-    partido.estado = 'Finalizado';
-
-    const elementosIncidencias = document.querySelectorAll('#ListaEventos li');
-    partido.incidencias = [];
-
-    elementosIncidencias.forEach(item => {
-        if (!item.classList.contains('Evento-vacio')) {
-            partido.incidencias.push(item.textContent);
-        }
-    });
-
-    alert('Partido finalizado correctamente. El acta ha sido generada.');
-    partidoEnVivo = null;
-    mostrarVista('VistaInicio');
-} 
 
 function renderizarActas() {
 
