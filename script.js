@@ -79,21 +79,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    const fechaInput = document.getElementById('inputFecha');
-    if (fechaInput) {
-        const hoy = new Date();
-
-        const year = hoy.getFullYear();
-        const month = String(hoy.getMonth() + 1).padStart(2, '0');
-        const day = String(hoy.getDate()).padStart(2, '0');
-        const hours = String(hoy.getHours()).padStart(2, '0');
-        const minutes = String(hoy.getMinutes()).padStart(2, '0');
-
-        fechaInput.min= `${year}-${month}-${day}T${hours}:${minutes}`;
-    }
-});
-
 document.getElementById('btnHubEnVivo').addEventListener('click', function() {
     mostrarVista('VistaEnVivo');
 });
@@ -106,6 +91,14 @@ document.getElementById('btnHubPartidos').addEventListener('click', function() {
 document.getElementById('btnHubConfig')?.addEventListener('click', function() {
     mostrarVista('VistaConfig');
 });
+
+const btnEquipos = document.getElementById('btnHubEquipos');
+if (btnEquipos) {
+    btnEquipos.addEventListener('click', function() {
+        mostrarVista('VistaEquipos');
+        cargarEquipos();
+    });
+}
 
 document.getElementById('btnAdminPartidos')?.addEventListener('click', function() {
     renderizarVistaPartidos();
@@ -489,7 +482,6 @@ if(partidoFinalizado){
         }
         
         if(!confirm('¿Estás seguro de finalizar el partido?')) return;
-
         const partido = obtenerPartidoActivo();
 
         if (typeof intervaloCronometro !== 'undefined') {
@@ -530,9 +522,11 @@ if(partidoFinalizado){
         }
 
         alert('El partido ha finalizado.');
-
+        
+        partidoEnVivo = null;
         renderizarVistaPartidos();
-        mostrarVista('VistaInicio');
+        renderizarActas();
+        mostrarVista('VistaActas');
 })}
 
 function obtenerPartidoActivo() {
@@ -566,69 +560,6 @@ if (btnActas) {
         renderizarActas();
     });
 }
-
-
-function renderizarVistaPartidos() {
-    const lista = document.getElementById('listaPartidos');
-    if (!lista) return;
-    
-    lista.innerHTML = '';
-
-    historialPartidos.forEach(p => {
-        const item = document.createElement('li');
-        item.className = 'tarjeta-partido';
-
-        const divInfo = document.createElement('div');
-        divInfo.className = 'InfoPartido';
-
-        const spanEstadio = document.createElement('span');
-        spanEstadio.className = 'estadio';
-        spanEstadio.textContent = p.estadio;
-
-        const spanFecha = document.createElement('span');
-        spanFecha.className = 'fecha';
-        spanFecha.textContent = p.fecha;
-
-        divInfo.appendChild(spanEstadio);
-        divInfo.appendChild(spanFecha);
-
-        const divLocal = document.createElement('div');
-        divLocal.className = 'Local';
-        divLocal.textContent = p.local;
-
-        const divEstado = document.createElement('div');
-        divEstado.className = 'estado';
-        
-        const strongVs = document.createElement('strong');
-        strongVs.textContent = 'VS';
-
-        const smallEstado = document.createElement('small');
-        smallEstado.textContent = p.estado;
-
-        divEstado.appendChild(strongVs);
-        divEstado.appendChild(smallEstado);
-
-        const divVisita = document.createElement('div');
-        divVisita.className = 'Visitante';
-        divVisita.textContent = p.visitante;
-
-        const divGolesLocal = document.createElement('div');
-        divGolesLocal.className = 'golesLocal';
-        divGolesLocal.textContent = p.golesLocal;
-
-        const divGolesVisita = document.createElement('div');
-        divGolesVisita.className = 'golesVisita';
-        divGolesVisita.textContent = p.golesVisita;
-
-        item.appendChild(divInfo);
-        item.appendChild(divLocal);
-        item.appendChild(divEstado);
-        item.appendChild(divVisita);
-        item.appendChild(divGolesLocal);
-        item.appendChild(divGolesVisita);
-
-        lista.appendChild(item);
-})}
 
 function finalizarPartido() {
     if (!hayPartidoActivo()) return alert('No hay un partido activo.');
