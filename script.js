@@ -830,6 +830,37 @@ function renderizarVistaPartidos() {
             }
             item.appendChild(btnSuspender);
         };
+
+        if(p.estado === 'Programado'){
+            const btnIniciar = document.createElement('button');
+            btnIniciar.className = 'btn-iniciar-partido';
+            btnIniciar.textContent = 'Iniciar Partido';
+            btnIniciar.onclick = function(){
+                if(hayPartidoActivo()) {
+                    alert('Ya hay un partido en vivo. Terminar partido antes de iniciar otro');
+                    return;
+                }
+
+                document.getElementById('marcadorLocalNombre').innerText = p.local;
+                document.getElementById('marcadorVisitaNombre').innerText = p.visitante;
+                document.getElementById('golesLocal').innerText = '0';
+                document.getElementById('golesVisita').innerText = '0';
+
+                const miniLinea = document.getElementById('infoPartidaMini');
+                if(miniLinea){
+                    miniLinea.innerText = `${p.local} • ${p.estadio} • ${p.visitante}`;
+                }
+
+                p.estado = 'En Vivo';
+                partidoEnVivo = p.id;
+                iniciarCronometro();
+                alert(`Comenzo ${p.local} vs ${p.visitante}`);
+                renderizarVistaPartidos();
+                mostrarVista('VistaEnVivo');  
+            };
+            item.appendChild(btnIniciar);
+        }
+
         lista.appendChild(item);
 
 })}

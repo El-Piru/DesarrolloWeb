@@ -1046,3 +1046,24 @@ body.modo-oscuro .equipo-acordeon {
     background-color: #dc2626;
     color: #ffffff;
 }
+
+ 
+
+
+.btn-iniciar-partido {
+    grid-column: 1 / -1;
+    background-color: rgba(34, 197, 94, 0.2);
+    color: #86efac;
+    border: 1px solid rgba(34, 197, 94, 0.5);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background-color 0.2s, color 0.2s;
+}
+.btn-iniciar-partido:hover {
+    background-color: #16a34a;
+    color: #ffffff;
+}
