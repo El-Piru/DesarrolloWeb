@@ -84,6 +84,7 @@ document.getElementById('btnHubEnVivo').addEventListener('click', function() {
 });
 
 document.getElementById('btnHubPartidos').addEventListener('click', function() {
+    renderizarVistaPartidos();
     mostrarVista('VistaPartidos');
 });
 
@@ -91,18 +92,42 @@ document.getElementById('btnHubConfig')?.addEventListener('click', function() {
     mostrarVista('VistaConfig');
 });
 
-const btnEquipos = document.getElementById('btnHubEquipos');
-if (btnEquipos) {
-    btnEquipos.addEventListener('click', function() {
-        mostrarVista('VistaEquipos');
-        cargarEquipos();
-    }); 
-}
+document.getElementById('btnAdminPartidos')?.addEventListener('click', function() {
+    renderizarVistaPartidos();
+    mostrarVista('VistaPartidos');
+});
+
+
+document.getElementById('btnAdminReset')?.addEventListener('click', function() {
+    const confirmar = confirm('¿Estás seguro de que deseas reiniciar todo el torneo? Se borrarán todos los partidos registrados.');
+    
+    if (confirmar) {
+        historialPartidos = [];
+        partidoEnVivo = null;
+        renderizarVistaPartidos();
+        alert('Torneo reiniciado. Todos los partidos fueron eliminados.');
+    }
+});
+
+document.getElementById('btnAdminArbitros')?.addEventListener('click',function(){
+    const lista = users.map(u => `• ${u.user} (${u.rol})`).join('\n');
+    alert('CUERPO ARBITRAL REGISTRADO:\n\n' + lista);
+});
+
+document.getElementById('btnAdminActas')?.addEventListener('click',function(){
+    renderizarVistaPartidos();
+    mostrarVista('VistaPartidos');
+})
 
 const botonesVolver = document.querySelectorAll('.btn-volver');
 botonesVolver.forEach(function(boton) {
     boton.addEventListener('click', function() {
-        mostrarVista('VistaMenuArbitro');
+        const badge = document.getElementById('userBadge').innerText;
+        if (badge.includes('Admin')) {
+            mostrarVista('VistaMenuAdmin');
+        } else {
+            mostrarVista('VistaMenuArbitro');
+        }
     });
 });
 
@@ -512,7 +537,7 @@ if (btnGuardarConfig) {
         }
         localStorage.setItem('nombreArbitroGuardado', nombre);
         alert('¡Configuración y perfil guardados correctamente!');
-        mostrarVista('VistaInicio');
+        mostrarVista('VistaMenuArbitro');
     });
 }
 
@@ -630,5 +655,19 @@ function renderizarVistaPartidos() {
         item.appendChild(divGolesLocal);
         item.appendChild(divGolesVisita);
 
+        const badge = document.getElementById('userBadge').innerText;
+        if(badge.includes('Admin') && p.estado !== 'Finalizado' && p.estado !== 'Suspendido'){
+            const btnSuspender = document.createElement('button');
+            btnSuspender.className = 'btn-suspender';
+            btnSuspender.textContent ='Suspender Partido';
+            btnSuspender.onclick = function(){
+                if(confirm(`¿Suspender el partido entre ${p.local} y ${p.visitante}?`)){
+                    p.estado = 'Suspendido';
+                    renderizarVistaPartidos();
+                }
+            }
+            item.appendChild(btnSuspender);
+        };
         lista.appendChild(item);
+
 })}

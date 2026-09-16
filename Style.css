@@ -940,3 +940,21 @@ body.modo-oscuro .equipo-acordeon {
     border-color: #ef4444;
     box-shadow: 0 8px 20px rgba(239,68,68,0.25);
 }
+
+.btn-suspender {
+    grid-column: 1 / -1;
+    background-color: rgba(220, 38, 38, 0.2);
+    color: #fca5a5;
+    border: 1px solid rgba(220, 38, 38, 0.5);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background-color 0.2s, color 0.2s;
+}
+.btn-suspender:hover {
+    background-color: #dc2626;
+    color: #ffffff;
+}
