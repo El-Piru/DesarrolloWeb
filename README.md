@@ -28,7 +28,7 @@ La estructura correspone a:
 
 # Funciones principales
 
-1. Inicio y cierre de sesión entre 2 tipos de usuarios (Árbitro y Administrador), con funciones distintas.
+1. Inicio y cierre de sesión entre 2 tipos de usuarios (Árbitro y Administrador), con funciones distintas. Para árbitro es user: *arbitro*, password: *1234* y para administrador es user: *admin*, password: *1234*.
 2. En Árbitro, crear y finalizar partidos (próximos o en vivo) y poder verlos en tiempo real para registrar incidencias (goles, tarjetas o cambios). Tambíen ver el historial de cada partido.
 3. En Administrador, gestionar árbitros, administrar equipos y consultar partidos.
 
