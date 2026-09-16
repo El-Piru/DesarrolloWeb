@@ -328,6 +328,7 @@ body {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
     max-width: 520px;
     margin: 0 auto;
+
 }
 
 .card-form h2 {
@@ -364,14 +365,19 @@ body {
     font-size: 0.95rem;
     width: 100%;
     transition: border-color 0.2s;
+    
 }
-
-.form-group input:focus,
-.form-group select:focus {
-    outline: none;
-    border-color: var(--accent); 
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+    transform: scale(1.15);
+    transition: transform 0.15s, opacity 0.15s;
 }
-
+input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+    transform: scale(1.25);
+}
 /* BOTON CREAR PARTIDO */
 .btn-guardar {
     background-color: var(--primary);
@@ -535,24 +541,24 @@ body {
 }
 
 #btnGol {
-    background: linear-gradient(180deg, #ebeae598 0%, #facc15bf 95%);
+    background: linear-gradient(180deg, #f3a492 0%, rgba(0, 0, 0, 0.415) 95%);
     color: #faf8f8;
-    border: 1px solid #d1d5db;
+    border: 1px solid #010101;
 }
 .btn-Cambio {
-    background: linear-gradient(180deg, #ebeae598 0%, #dc2626bf 95%);
+    background: linear-gradient(180deg, #f3a492 0%, rgba(0,0,0,0.415) 95%);
     color: #f8f3f3;
-    border: 1px solid #981d3aa9;
+    border: 1px solid #030303a9;
 }
 .btn-Amarilla {
-    background: linear-gradient(180deg, #facc15 0%, #b45309 100%);
+    background: linear-gradient(180deg, #f3b2a3 0%, rgb(173, 158, 0) 100%);
     color: #f6f4f4;
-    border: 1px solid #d97706;
+    border: 1px solid #060606;
 }
 .btn-Roja {
-    background: linear-gradient(180deg, #dc2626 0%, #6b1111 100%);
+    background: linear-gradient(180deg, #f3a492 0%, rgb(110, 2, 2) 100%);
     color: #fbfafa;
-    border: 1px solid #991b1b;
+    border: 1px solid #060606;
 }
 
 .btn-FinalizarPartido{
@@ -853,11 +859,6 @@ body.modo-oscuro .equipo-acordeon {
     color: #ffffff !important;
 }
 
-/* ==========================================
-   VISTA HISTORIAL DE ACTAS (TARJETAS)
-   ========================================== */
-
-/* Contenedor principal de todas las tarjetas de actas */
 #contenedorActas {
     display: flex;
     flex-direction: column;
@@ -866,7 +867,7 @@ body.modo-oscuro .equipo-acordeon {
     margin: 0 auto;
 }
 
-/* Tarjeta individual de cada acta */
+
 .acta-card {
     background-color: rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(10px);
@@ -882,7 +883,7 @@ body.modo-oscuro .equipo-acordeon {
     border-color: var(--accent);
 }
 
-/* Título de los equipos (Partido) */
+
 .acta-card h3 {
     color: var(--primary);
     font-size: 1.25rem;
@@ -945,3 +946,124 @@ body.modo-oscuro .equipo-acordeon {
     margin-bottom: 0;
 }
 
+
+
+#VistaConfig {
+    max-width: 520px;
+    margin:0 auto;
+}
+
+.config-card{
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.config-card h3{
+    color: var(--primary);
+    font-size: 1.1rem;
+    margin-bottom:20px;
+    border-bottom: 1px solid var(--borde);
+    padding-bottom: 10px;
+}
+
+.config-opcion{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.config-opcion label{
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.config-opcion input[type="text"] {
+    background-color: rgba(0, 0, 0, 0.35);
+    color: var(--primary);
+    border: 1px solid var(--borde);
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    width: 55%;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.config-opcion input[type="text"]:focus {
+    border-color: var(--accent);
+}
+.config-opcion input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--accent);
+    cursor: pointer;
+}
+
+.card-admin {
+    border: 1px solid #38bdf8;
+    background: linear-gradient(180deg, rgba(56, 189, 248, 0.25) 0%, rgba(10, 20, 30, 0.7) 100%);
+    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.2);
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.card-admin:hover {
+    transform: translateY(-4px);
+    border-color: #7dd3fc;
+    box-shadow: 0 8px 25px rgba(56, 189, 248, 0.4);
+}
+
+.card-admin-peligro{
+    border: 1px solid rgb(160, 40, 40);
+    background: linear-gradient(180deg, rgb(239, 68, 68)0%,rgba(58, 20, 20, 0.5)100%);
+}
+
+.card-admin-peligro:hover{
+    border-color: #ef4444;
+    box-shadow: 0 8px 20px rgba(239,68,68,0.25);
+}
+
+.btn-suspender {
+    grid-column: 1 / -1;
+    background-color: rgba(220, 38, 38, 0.2);
+    color: #fca5a5;
+    border: 1px solid rgba(220, 38, 38, 0.5);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background-color 0.2s, color 0.2s;
+}
+.btn-suspender:hover {
+    background-color: #dc2626;
+    color: #ffffff;
+}
+
+ 
+
+
+.btn-iniciar-partido {
+    grid-column: 1 / -1;
+    background-color: rgba(34, 197, 94, 0.2);
+    color: #86efac;
+    border: 1px solid rgba(34, 197, 94, 0.5);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background-color 0.2s, color 0.2s;
+}
+.btn-iniciar-partido:hover {
+    background-color: #16a34a;
+    color: #ffffff;
+}
