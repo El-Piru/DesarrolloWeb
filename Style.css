@@ -853,11 +853,6 @@ body.modo-oscuro .equipo-acordeon {
     color: #ffffff !important;
 }
 
-/* ==========================================
-   VISTA HISTORIAL DE ACTAS (TARJETAS)
-   ========================================== */
-
-/* Contenedor principal de todas las tarjetas de actas */
 #contenedorActas {
     display: flex;
     flex-direction: column;
