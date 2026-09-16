@@ -859,11 +859,6 @@ body.modo-oscuro .equipo-acordeon {
     color: #ffffff !important;
 }
 
-/* ==========================================
-   VISTA HISTORIAL DE ACTAS (TARJETAS)
-   ========================================== */
-
-/* Contenedor principal de todas las tarjetas de actas */
 #contenedorActas {
     display: flex;
     flex-direction: column;
@@ -872,7 +867,7 @@ body.modo-oscuro .equipo-acordeon {
     margin: 0 auto;
 }
 
-/* Tarjeta individual de cada acta */
+
 .acta-card {
     background-color: rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(10px);
@@ -888,7 +883,7 @@ body.modo-oscuro .equipo-acordeon {
     border-color: var(--accent);
 }
 
-/* Título de los equipos (Partido) */
+
 .acta-card h3 {
     color: var(--primary);
     font-size: 1.25rem;
