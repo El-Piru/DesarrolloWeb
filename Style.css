@@ -865,6 +865,7 @@ body.modo-oscuro .equipo-acordeon {
     gap: 20px;
     max-width: 650px;
     margin: 0 auto;
+    margin-top: 20px;
 }
 
 

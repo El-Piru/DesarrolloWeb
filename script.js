@@ -123,8 +123,8 @@ document.getElementById('btnAdminArbitros')?.addEventListener('click',function()
 });
 
 document.getElementById('btnAdminActas')?.addEventListener('click',function(){
-    renderizarVistaPartidos();
-    mostrarVista('VistaPartidos');
+    renderizarActas();
+    mostrarVista('VistaActas');
 })
 
 const botonesVolver = document.querySelectorAll('.btn-volver');
@@ -560,31 +560,6 @@ if (btnActas) {
         renderizarActas();
     });
 }
-
-function finalizarPartido() {
-    if (!hayPartidoActivo()) return alert('No hay un partido activo.');
-    if (!confirm('¿Deseas finalizar el partido y generar el acta?')) return;
-
-    const partido = obtenerPartidoActivo();
-    clearInterval(intervaloCronometro);
-
-    partido.golesLocal = document.getElementById('golesLocal').textContent;
-    partido.golesVisita = document.getElementById('golesVisita').textContent;
-    partido.estado = 'Finalizado';
-
-    const elementosIncidencias = document.querySelectorAll('#ListaEventos li');
-    partido.incidencias = [];
-
-    elementosIncidencias.forEach(item => {
-        if (!item.classList.contains('Evento-vacio')) {
-            partido.incidencias.push(item.textContent);
-        }
-    });
-
-    alert('Partido finalizado correctamente. El acta ha sido generada.');
-    partidoEnVivo = null;
-    mostrarVista('VistaInicio');
-} 
 
 function renderizarActas() {
 
