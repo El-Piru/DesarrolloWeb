@@ -859,6 +859,99 @@ body.modo-oscuro .equipo-acordeon {
     color: #ffffff !important;
 }
 
+/* ==========================================
+   VISTA HISTORIAL DE ACTAS (TARJETAS)
+   ========================================== */
+
+/* Contenedor principal de todas las tarjetas de actas */
+#contenedorActas {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+/* Tarjeta individual de cada acta */
+.acta-card {
+    background-color: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--borde);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.acta-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+}
+
+/* Título de los equipos (Partido) */
+.acta-card h3 {
+    color: var(--primary);
+    font-size: 1.25rem;
+    font-weight: 800;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--borde);
+}
+
+
+.acta-card p {
+    color: var(--text);
+    font-size: 0.92rem;
+    margin-bottom: 6px;
+    opacity: 0.9;
+}
+
+.acta-card p:nth-of-type(3) {
+    background-color: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--borde);
+    color: var(--primary);
+    font-size: 1.15rem;
+    font-weight: 800;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 14px 0;
+}
+
+
+.acta-card h4 {
+    color: var(--accent);
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+}
+
+.acta-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.acta-card ul li {
+    background-color: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--borde);
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    color: var(--text);
+    font-size: 0.9rem;
+}
+
+.acta-card ul li:last-child {
+    margin-bottom: 0;
+}
+
+
 
 #VistaConfig {
     max-width: 520px;
