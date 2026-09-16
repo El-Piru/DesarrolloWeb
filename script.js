@@ -99,6 +99,7 @@ document.getElementById('btnHubEnVivo').addEventListener('click', function() {
 });
 
 document.getElementById('btnHubPartidos').addEventListener('click', function() {
+    renderizarVistaPartidos();
     mostrarVista('VistaPartidos');
 });
 
@@ -106,18 +107,42 @@ document.getElementById('btnHubConfig')?.addEventListener('click', function() {
     mostrarVista('VistaConfig');
 });
 
-const btnEquipos = document.getElementById('btnHubEquipos');
-if (btnEquipos) {
-    btnEquipos.addEventListener('click', function() {
-        mostrarVista('VistaEquipos');
-        cargarEquipos();
-    }); 
-}
+document.getElementById('btnAdminPartidos')?.addEventListener('click', function() {
+    renderizarVistaPartidos();
+    mostrarVista('VistaPartidos');
+});
+
+
+document.getElementById('btnAdminReset')?.addEventListener('click', function() {
+    const confirmar = confirm('¿Estás seguro de que deseas reiniciar todo el torneo? Se borrarán todos los partidos registrados.');
+    
+    if (confirmar) {
+        historialPartidos = [];
+        partidoEnVivo = null;
+        renderizarVistaPartidos();
+        alert('Torneo reiniciado. Todos los partidos fueron eliminados.');
+    }
+});
+
+document.getElementById('btnAdminArbitros')?.addEventListener('click',function(){
+    const lista = users.map(u => `• ${u.user} (${u.rol})`).join('\n');
+    alert('CUERPO ARBITRAL REGISTRADO:\n\n' + lista);
+});
+
+document.getElementById('btnAdminActas')?.addEventListener('click',function(){
+    renderizarVistaPartidos();
+    mostrarVista('VistaPartidos');
+})
 
 const botonesVolver = document.querySelectorAll('.btn-volver');
 botonesVolver.forEach(function(boton) {
     boton.addEventListener('click', function() {
-        mostrarVista('VistaMenuArbitro');
+        const badge = document.getElementById('userBadge').innerText;
+        if (badge.includes('Admin')) {
+            mostrarVista('VistaMenuAdmin');
+        } else {
+            mostrarVista('VistaMenuArbitro');
+        }
     });
 });
 
@@ -153,7 +178,7 @@ if (formNuevoPartido) {
             return;
         }
 
-        const fechaFormateada = fechaPartido.toLocaleDateString([], {
+        const fechaFormateada = fechaPartido.toLocaleString([], {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric',
@@ -515,18 +540,24 @@ function obtenerPartidoActivo() {
 }
 
 const btnGuardarConfig = document.getElementById('btnGuardarConfig');
-
 if (btnGuardarConfig) {
     btnGuardarConfig.addEventListener('click', function() {
-
-        const nombre = document.getElementById('nombreArbitro').value;
-
-        document.getElementById('userBadge').innerText =
-            `Árbitro: ${nombre}`;
-
-        alert('Configuración guardada correctamente.');
+        const nombre = document.getElementById('nombreArbitro').value.trim();
+        if (!nombre) {
+            alert('Por favor, ingresa un nombre válido.');
+            return;
+        }
+        document.getElementById('userBadge').innerText = `Árbitro: ${nombre}`;
+        const saludo = document.getElementById('saludoUsuario');
+        if (saludo) {
+            saludo.innerText = `¡Hola, ${nombre}!`;
+        }
+        localStorage.setItem('nombreArbitroGuardado', nombre);
+        alert('¡Configuración y perfil guardados correctamente!');
+        mostrarVista('VistaMenuArbitro');
     });
 }
+
  
 const btnActas = document.getElementById('btnHubActas');
 if (btnActas) {
@@ -674,6 +705,58 @@ function renderizarActas() {
     });
 }
 
+const btnCambio= document.getElementById('btnCambio');
+const modalCambio = document.getElementById('modalCambio');
+const inputJugadorSale=document.getElementById('inputJugadorSale');
+const inputJugadorEntra = document.getElementById('inputJugadorEntra');
+const btnCambioLocal = document.getElementById('btnCambioLocal');
+const btnCambioVisita = document.getElementById('btnCambioVisita');
+const btnCancelarCambio = document.getElementById('btnCancelarCambio');
+
+if (btnCambio){
+    btnCambio.addEventListener('click' , function() {
+        const local = document.getElementById('marcadorLocalNombre').innerText;
+        const visitante = document.getElementById('marcadorVisitaNombre').innerText;
+
+        btnCambioLocal.innerText = local;
+        btnCambioVisita.innerText = visitante;
+
+        inputJugadorSale.value = '';
+        inputJugadorEntra.value = '';
+
+        modalCambio.style.display = 'flex';
+    });
+}
+
+if(btnCambioLocal){
+    btnCambioLocal.addEventListener('click' , function(){
+        const Local = document.getElementById('marcadorLocalNombre').innerText;
+        const sale = inputJugadorSale.value.trim() || 'Jugador';
+        const entra = inputJugadorEntra.value.trim() || 'Jugador';
+
+        registrarIncidencia(`Cambio en ${Local}: Sale ${sale} -> entra ${entra}`);
+        modalCambio.style.display = 'none';
+    });
+}
+
+if(btnCambioVisita){
+    btnCambioVisita.addEventListener('click' , function(){
+        const visitante = document.getElementById('marcadorVisitaNombre').innerText;
+        const sale = inputJugadorSale.value.trim() || 'Jugador';
+        const entra = inputJugadorEntra.value.trim() || 'Jugador';
+
+        registrarIncidencia(`Cambio en ${visitante}: Sale ${sale} -> entra ${entra}`);
+        modalCambio.style.display = 'none';
+    });
+}
+
+if(btnCancelarCambio){
+    btnCancelarCambio.addEventListener('click',function(){
+        modalCambio.style.display = 'none';
+    })
+}
+
+
 
 function renderizarVistaPartidos() {
     const lista = document.getElementById('listaPartidos');
@@ -734,5 +817,50 @@ function renderizarVistaPartidos() {
         item.appendChild(divGolesLocal);
         item.appendChild(divGolesVisita);
 
+        const badge = document.getElementById('userBadge').innerText;
+        if(badge.includes('Admin') && p.estado !== 'Finalizado' && p.estado !== 'Suspendido'){
+            const btnSuspender = document.createElement('button');
+            btnSuspender.className = 'btn-suspender';
+            btnSuspender.textContent ='Suspender Partido';
+            btnSuspender.onclick = function(){
+                if(confirm(`¿Suspender el partido entre ${p.local} y ${p.visitante}?`)){
+                    p.estado = 'Suspendido';
+                    renderizarVistaPartidos();
+                }
+            }
+            item.appendChild(btnSuspender);
+        };
+
+        if(p.estado === 'Programado'){
+            const btnIniciar = document.createElement('button');
+            btnIniciar.className = 'btn-iniciar-partido';
+            btnIniciar.textContent = 'Iniciar Partido';
+            btnIniciar.onclick = function(){
+                if(hayPartidoActivo()) {
+                    alert('Ya hay un partido en vivo. Terminar partido antes de iniciar otro');
+                    return;
+                }
+
+                document.getElementById('marcadorLocalNombre').innerText = p.local;
+                document.getElementById('marcadorVisitaNombre').innerText = p.visitante;
+                document.getElementById('golesLocal').innerText = '0';
+                document.getElementById('golesVisita').innerText = '0';
+
+                const miniLinea = document.getElementById('infoPartidaMini');
+                if(miniLinea){
+                    miniLinea.innerText = `${p.local} • ${p.estadio} • ${p.visitante}`;
+                }
+
+                p.estado = 'En Vivo';
+                partidoEnVivo = p.id;
+                iniciarCronometro();
+                alert(`Comenzo ${p.local} vs ${p.visitante}`);
+                renderizarVistaPartidos();
+                mostrarVista('VistaEnVivo');  
+            };
+            item.appendChild(btnIniciar);
+        }
+
         lista.appendChild(item);
+
 })}
