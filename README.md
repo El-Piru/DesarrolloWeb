@@ -34,7 +34,7 @@ La estructura correspone a:
 
 ---
 
-#IP utilizada
+# IP utilizada
 
 Para subir la página creada, se utilizó la instancia de AWS Academy, usando una IP elástica
 
