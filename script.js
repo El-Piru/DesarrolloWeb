@@ -24,6 +24,7 @@ function mostrarVista(idVista) {
 
 document.addEventListener('DOMContentLoaded', function() {
     mostrarVista('VistaInicioSesión');
+    cargarUsuarios();
 });
 
 document.getElementById('cambiarRol').addEventListener('click', function() {
@@ -34,10 +35,18 @@ document.getElementById('btnHubCrearPartido').addEventListener('click', function
     mostrarVista('VistaNuevoPartido');
 });
 
-const users = [
-    {user: 'admin', pass: '1234', rol: 'Admin'},
-    {user: 'arbitro', pass: '1234', rol: 'Árbitro'},
-]
+let users = [];
+async function cargarUsuarios() {
+    try {
+        const response = await fetch('users.json');
+        if (!response.ok) {
+            throw new Error('Error al cargar los usuarios.json');
+        }
+        users = await response.json();
+    } catch (error) {
+        console.error('Error al cargar los usuarios:', error);
+    }
+}
 
 const inicioSesion = document.getElementById('formLogin');
 if (inicioSesion) {
@@ -49,18 +58,17 @@ if (inicioSesion) {
 
         const usuarioEncontrado = users.find(u => u.user === usuario && u.pass === contrasena);
         if (usuarioEncontrado) {
-            userBadge.innerText = `${usuarioEncontrado.rol}: ${usuarioEncontrado.user}`;     
-        }
+            userBadge.innerText = `${usuarioEncontrado.rol}: ${usuarioEncontrado.user}`;
+            alert('Inicio de sesión exitoso. Bienvenido, ' + usuarioEncontrado.user + '!');
 
-        alert('Inicio de sesión exitoso. Bienvenido, ' + usuarioEncontrado.user + '!');
-
-        if (usuarioEncontrado.rol === 'Admin') {
-            mostrarVista('VistaMenuAdmin');
+            if (usuarioEncontrado.rol === 'Admin') {
+                mostrarVista('VistaMenuAdmin');
+            }
+            else if (usuarioEncontrado.rol === 'Árbitro'){
+                mostrarVista('VistaMenuArbitro');
+            }
         }
-        else if (usuarioEncontrado.rol === 'Árbitro'){
-            mostrarVista('VistaMenuArbitro');
-        }
-        else{
+        else {
             alert('Usuario o Contraseña incorrectos. Inténtelo denuevo.');
         }
     });
