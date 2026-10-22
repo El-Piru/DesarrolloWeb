@@ -1,8 +1,19 @@
-const users = [
-    { user: 'admin', pass: '1234', rol: 'Admin' },
-    { user: 'arbitro', pass: '1234', rol: 'Árbitro' }
-];
+let users = [];
+async function cargarUsuarios() {
+    try {
+        const response = await fetch('users.json');
+        if (!response.ok) {
+            throw new Error('Error al cargar los usuarios.json');
+        }
+        users = await response.json();
+    } catch (error) {
+        console.error('Error al cargar los usuarios:', error);
+    }
+}
 
+document.addEventListener('DOMContentLoaded', function() {
+    cargarUsuarios();
+});
 
 const inicioSesion = document.getElementById('formLogin');
 if (inicioSesion) {
@@ -13,22 +24,19 @@ if (inicioSesion) {
         const contrasena = document.getElementById('inputPassword').value.trim();
 
         const usuarioEncontrado = users.find(u => u.user === usuario && u.pass === contrasena);
-
         if (usuarioEncontrado) {
-            const userBadge = document.getElementById('userBadge');
-            if (userBadge) {
-                userBadge.innerText = `${usuarioEncontrado.rol}: ${usuarioEncontrado.user}`;
-            }
-
+            userBadge.innerText = `${usuarioEncontrado.rol}: ${usuarioEncontrado.user}`;
             alert('Inicio de sesión exitoso. Bienvenido, ' + usuarioEncontrado.user + '!');
 
             if (usuarioEncontrado.rol === 'Admin') {
                 mostrarVista('VistaMenuAdmin');
-            } else if (usuarioEncontrado.rol === 'Árbitro') {
+            }
+            else if (usuarioEncontrado.rol === 'Árbitro'){
                 mostrarVista('VistaMenuArbitro');
             }
-        } else {
-            alert('Usuario o Contraseña incorrectos. Inténtelo de nuevo.');
+        }
+        else {
+            alert('Usuario o Contraseña incorrectos. Inténtelo denuevo.');
         }
     });
 }
