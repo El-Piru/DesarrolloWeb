@@ -1069,7 +1069,7 @@ body.modo-oscuro .equipo-acordeon {
     color: #ffffff;
 }
 
-/* Estilo para la barra de búsqueda en la sección de equipos */
+
 #VistaEquipos input[type="text"],
 input[placeholder*="Buscar"] {
     width: 100%;
@@ -1090,4 +1090,14 @@ input[placeholder*="Buscar"] {
 input[placeholder*="Buscar"]:focus {
     border-color: var(--accent);
     box-shadow: 0 0 10px rgba(233, 124, 171, 0.3);
+}
+
+/* EFECTO GLASSMORPHISM EN TARJETAS Y CONTENEDORES */
+.card-form, .acta-card, .config-card, .historial-eventos {
+    background: rgba(18, 18, 20, 0.65) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    border-radius: 18px !important;
 }
