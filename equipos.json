@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "nombre": "Colo-Colo",
+        "jugadores": ["Esteban Pavez", "Arturo Vidal", "Lucas Cepeda", "Brayan Cortés"]
+    },
+    {
+        "id": 2,
+        "nombre": "U. de Chile",
+        "jugadores": ["Marcelo Díaz", "Charles Aránguiz", "Leandro Fernández", "Gabriel Castellón"]
+    },
+    {
+        "id": 3,
+        "nombre": "U. Católica",
+        "jugadores": ["Fernando Zampedri", "Gonzalo Tapia", "Jader Gentil", "Sebastián Pérez"]
+    },
+    {
+        "id": 4,
+        "nombre": "Cobreloa",
+        "jugadores" : ["Rodolfo González", "Cristián Insaurralde", "Juan Leiva", "Nicolás Avellaneda"]
+    },
+    {
+        "id": 5,
+        "nombre": "Audax Italiano",
+        "jugadores" : ["Tomás Ahumada", "Óliver Rojas", "Favian Loyola", "Alessandro Riep"]
+    },
+    {
+        "id": 6,
+        "nombre": "Deportes Iquique",
+        "jugadores" : ["Daniel Castillo", "Dilan Rojas", "Juan Bacca", "Bayron Barrera"]
+    },
+    {
+        "id": 7,
+        "nombre": "Huachipato",
+        "jugadores": ["Sebastián Mella", "Maicol León", "Ezequiel Cañete", "Mario Briceño"]
+    },
+    {
+        "id": 8,
+        "nombre": "Ñublense",
+        "jugadores": ["Claudio Chandia", "Jovany Campusano", "Alex Valdés", "Lucas Molina"]
+    }
+]
