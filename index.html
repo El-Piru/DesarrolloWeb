@@ -242,13 +242,19 @@
             <button type ="button" class="btn-volver">Volver al menu</button>
             <h2>Plantillas de Equipos y Jugadores</h2>
             
+            <div style="margin: 15px 0;">
+                <button type="button" @click = "mostrarAyuda" = !mostrarAyuda" class="btn-guardar" style="width: auto; padding: 8px 16px;"
+                    <span> x-text ="mostrarAyuda" ? 'Ocultar Guia del Arbitro' : 'Ver guia de Arbitro'"></span>
+                </button>
+            </div>
+
             <input type="text" x-model="busqueda" id="inputBuscarEquipo" placeholder="Buscar equipo o jugador">
             <p x-show="cargando">Cargando...</p>
             <p x-show="error">Se ha producido un error</p>
             <p x-show="!cargando && !error && equiposFiltrados.length === 0">No se encontraron equipos o jugadores</p>
 
             <div id="contenedorEquipos" class="grid-equipos">
-                <template x-for="equipo in equiposFiltrados" :key="equipo.nombre">
+                <template x-for="equipo in equiposFiltrados" :key="equipo.id">
                     <details class="equipo-acordeon">
                         <summary class="equipo-summary">
                             <span class="nombre-club" x-text="equipo.nombre"></span>
@@ -345,12 +351,12 @@
 
 
     </main>
-    <script src="app.js"></script>
-    <script src="login.js"></script>
-    <script src="equipos.js"></script>
-    <script src="partidos.js"></script>
-    <script src="PartidosEnVivo.js"></script>
-    <script src="actas.js"></script>
+    <script src="Carpeta.js/app.js"></script>
+    <script src="Carpeta.js/login.js"></script>
+    <script src="Carpeta.js/equipos.js"></script>
+    <script src="Carpeta.js/partidos.js"></script>
+    <script src="Carpeta.js/PartidosEnVivo.js"></script>
+    <script src="Carpeta.js/actas.js"></script>
 </body>
 </html>
 

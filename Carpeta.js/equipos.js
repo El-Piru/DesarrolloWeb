@@ -4,6 +4,7 @@ function equipos() {
         busqueda: '',
         cargando: true,
         error: '',
+        mostrarAyuda: false,
         async cargarEquipos() {
             try {
                 const response = await fetch('equipos.json');
