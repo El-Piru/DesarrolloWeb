@@ -1083,3 +1083,169 @@ body.modo-oscuro .equipo-acordeon {
     margin-left: auto;
     margin-right: auto;
 }
+
+
+#VistaEquipos input[type="text"],
+input[placeholder*="Buscar"] {
+    width: 100%;
+    max-width: 500px;
+    display: block;
+    margin: 0 auto 24px auto;
+    background-color: rgba(0, 0, 0, 0.25);
+    color: var(--primary);
+    border: 1px solid var(--borde);
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#VistaEquipos input[type="text"]:focus,
+input[placeholder*="Buscar"]:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 10px rgba(233, 124, 171, 0.3);
+}
+
+.logo h1::before {
+    content: "⚽ ";
+    margin-right: 6px;
+    font-size: 1.5rem;
+    vertical-align: middle;
+}
+
+/* MODO CLAROOO LOS CONTENEDORES MAS CLAROS!! */
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --text: #30232B;
+        --background: #FCEBF2;
+        --primary: #570F2E;
+        --secondary: #FFFFFF;
+        --accent: #CF5530;
+        --borde: rgba(87, 15, 46, 0.14);
+        --btn-text: #FFFFFF;
+        --nav-bg: rgba(255, 255, 255, 0.92);
+    }
+
+    body {
+        background: linear-gradient(
+            145deg,
+            #FFF9FC 0%,
+            #FCEBF2 55%,
+            #F8E1EB 100%
+        );
+        color: var(--text);
+    }
+
+    .navbar {
+        background: rgba(255, 255, 255, 0.92);
+        border-bottom: 1px solid #EBD3DF;
+        box-shadow: 0 3px 14px rgba(87, 15, 46, 0.04);
+    }
+
+    .card-form,
+    .config-card {
+        background: rgba(255, 255, 255, 0.88);
+        border: 1px solid #E9C8D7;
+        box-shadow: 0 12px 35px rgba(87, 15, 46, 0.09);
+        backdrop-filter: blur(12px);
+    }
+
+    .form-group input,
+    .form-group select,
+    .config-opcion input[type="text"],
+    #VistaEquipos input[type="text"],
+    input[placeholder*="Buscar"] {
+        background: #FFFCFE;
+        color: #30232B;
+        border: 1px solid #DCC0CE;
+    }
+
+    .form-group input::placeholder,
+    #VistaEquipos input::placeholder,
+    input[placeholder*="Buscar"]::placeholder {
+        color: #8B7B85;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .config-opcion input[type="text"]:focus {
+        outline: none;
+        border-color: #9A426B;
+        box-shadow: 0 0 0 3px rgba(154, 66, 107, 0.12);
+    }
+
+    .btn-guardar {
+        background: linear-gradient(135deg, #790F3D, #570F2E);
+        color: #FFFFFF;
+        box-shadow: 0 5px 14px rgba(87, 15, 46, 0.17);
+    }
+
+    .btn-guardar:hover {
+        background: #94184D;
+        color: #FFFFFF;
+    }
+
+    .hub-card,
+    .acta-card,
+    .equipo-acordeon,
+    .historial-eventos {
+        background: rgba(255, 255, 255, 0.82);
+        border: 1px solid #E9D2DE;
+        box-shadow: 0 5px 18px rgba(87, 15, 46, 0.06);
+    }
+
+    .hub-card:hover,
+    .acta-card:hover {
+        background: #FFFFFF;
+        border-color: #B66A88;
+    }
+
+    .modal-contenido {
+        background: #FFFAFC;
+        color: #30232B;
+        border: 1px solid #E9C8D7;
+        box-shadow: 0 12px 35px rgba(49, 12, 29, 0.18);
+    }
+
+    input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+        filter: none;
+    }
+}
+
+
+body {
+    background-image: url("./fondo-futbolclaro.png") !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+}
+
+
+body.modo-oscuro {
+    background-image: url("./fondo-futbol.png") !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+}
+
+
+body.modo-claro {
+    background-image: url("./fondo-futbolclaro.png") !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+}
+
+
+@media (prefers-color-scheme: dark) {
+    body:not(.modo-claro) {
+        background-image: url("./fondo-futbol.png") !important;
+    }
+}
+
+
