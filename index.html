@@ -116,7 +116,7 @@
             </div>
         </section>
 
-        <section id="VistaNuevoPartido" class="vista-content ">
+        <section id="VistaNuevoPartido" class="vista-content " x-data="">
             <div class="card-form">
                 <button type="button" class="btn-volver">Volver al menu</button>
                 <h2>Crear Nuevo Partido</h2>
@@ -126,10 +126,9 @@
                         <label for="selectLocal">Equipo Local</label>
                         <select id="selectLocal" required>
                             <option value="">Seleccione Equipo Local</option>
-                            <option value="Colo-Colo">Colo-Colo</option>
-                            <option value="U. de Chile">U. de Chile</option>
-                            <option value="U. Católica">U. Católica</option>
-                            <option value="Cobreloa">Cobreloa</option>
+                            <template x-for="equipo in $store.equipos.lista" :key="equipo.id">
+                                <option :value="equipo.nombre" x-text="equipo.nombre"></option>
+                            </template>
                         </select>
                     </div>
 
@@ -137,10 +136,9 @@
                         <label for="selectVisitante">Equipo Visitante</label>
                         <select id="selectVisitante" required>
                             <option value="">Seleccione Equipo Visitante</option>
-                            <option value="Colo-Colo">Colo-Colo</option>
-                            <option value="U. de Chile">U. de Chile</option>
-                            <option value="U. Católica">U. Católica</option>
-                            <option value="Cobreloa">Cobreloa</option>
+                            <template x-for="equipo in $store.equipos.lista" :key="equipo.id">
+                                <option :value="equipo.nombre" x-text="equipo.nombre"></option>
+                            </template>
                         </select>
                     </div>
 
@@ -230,7 +228,7 @@
                     <h3>Sustitucion de Jugador</h3>
                     <div class="form-group" style="margin-bottom: 12px; text-align: left;">
                         <label style="font-size: 0.8rem; color: #e4e1e1;">Jugador que sale (Nombre o N°)</label>
-                        <input type="text" id="inputJugadorSale" placeholder="Ej: Vodal o N°7"> 
+                        <input type="text" id="inputJugadorSale" placeholder="Ej: Vidal o N°7"> 
                     </div>
 
                     <div class="form-group" style="margin-bottom: 18px; text-align: left;">
@@ -249,14 +247,14 @@
             </div>
 
         </section>
-        <section id="VistaEquipos" class="vista-content" x-data="equipos()" x-init="cargarEquipos()">
+        <section id="VistaEquipos" class="vista-content" x-data="equipos()">
             <button type ="button" class="btn-volver">Volver al menu</button>
             <h2>Plantillas de Equipos y Jugadores</h2>
             
             <input type="text" x-model="busqueda" id="inputBuscarEquipo" placeholder="Buscar equipo o jugador">
-            <p x-show="cargando">Cargando...</p>
-            <p x-show="error">Se ha producido un error</p>
-            <p x-show="!cargando && !error && equiposFiltrados.length === 0">No se encontraron equipos o jugadores</p>
+            <p x-show="$store.equipos.cargando">Cargando...</p>
+            <p x-show="$store.equipos.error">Se ha producido un error</p>
+            <p x-show="!$store.equipos.cargando && !$store.equipos.error && equiposFiltrados.length === 0">No se encontraron equipos o jugadores</p>
 
             <div id="contenedorEquipos" class="grid-equipos">
                 <template x-for="equipo in equiposFiltrados" :key="equipo.id">
