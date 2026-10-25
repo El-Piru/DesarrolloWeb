@@ -8,6 +8,8 @@ async function cargarUsuarios() {
         users = await response.json();
     } catch (error) {
         console.error('Error al cargar los usuarios:', error);
+        const errorLogin = document.getElementById('errorLogin');
+        errorLogin.hidden = false;
     }
 }
 
@@ -20,6 +22,10 @@ if (inicioSesion) {
     inicioSesion.addEventListener('submit', function(e) {
         e.preventDefault();
 
+        if (users.length === 0) {
+            document.getElementById('errorLogin').hidden = false;
+            return;
+        }
         const usuario = document.getElementById('inputUsuario').value.trim();
         const contrasena = document.getElementById('inputPassword').value.trim();
 
