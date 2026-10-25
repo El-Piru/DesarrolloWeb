@@ -1,34 +1,43 @@
-function equipos() {
-    return{
-        datosEquipos: [],
-        busqueda: '',
-        cargando: true,
+document.addEventListener('alpine:init', () => {
+    Alpine.store('equipos', {
+        lista: [],
+        cargado: true,
         error: '',
-        mostrarAyuda: false,
-        nuevoNombre: '',
-        nuevosJugadores: '',
-        mensajeError: '',
-        mensajeExito: '',
-        async cargarEquipos() {
+
+        async init() {
             try {
                 const response = await fetch('equipos.json');
                 if (!response.ok) {
                     throw new Error('Error al cargar los datos de los equipos');
                 }
-                this.datosEquipos = await response.json();
+                this.lista = await response.json();
             } catch (error) {
                 this.error = 'Error al cargar los datos de los equipos';
                 console.error(error);
             } finally {
                 this.cargando = false;
             }
-        },
+        }
+    });
+});
+
+function equipos() {
+    return{
+        datosEquipos: [],
+        busqueda: '',
+        mostrarAyuda: false,
+        nuevoNombre: '',
+        nuevosJugadores: '',
+        mensajeError: '',
+        mensajeExito: '',
+        
         get equiposFiltrados() {
             const textoBusqueda = this.busqueda.trim().toLowerCase();
+            const lista = this.$store.equipos.lista;
             if (textoBusqueda === '') {
-                return this.datosEquipos;
+                return lista;
             }
-            return this.datosEquipos.filter(equipo =>
+            return lista.filter(equipo =>
                 equipo.nombre.toLowerCase().includes(textoBusqueda) || 
                 equipo.jugadores.some(jugador => jugador.toLowerCase().includes(textoBusqueda))
             );
@@ -48,7 +57,7 @@ function equipos() {
                 jugadores: this.nuevosJugadores.split(',').map(j => j.trim()).filter(j => j!=='')
             };
 
-            this.datosEquipos.push(nuevoClub);
+            this.$store.equipos.lista.push(nuevoClub);
             this.mensajeExito = `!Club "${nuevoClub.nombre}" ha sido agregado temporalmente con exito.`;
 
             this.nuevoNombre = '';
