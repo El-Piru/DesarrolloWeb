@@ -286,6 +286,26 @@
                     </details>
                 </template>
             </div>
+
+            <div class ="card-form" style ="margin-top: 30px;">
+                <h3>Registrar nuevo Club</h3>
+                <form @submit.prevent ="agregarEquipo()">
+                    <div class="form-group">
+                        <label for ="nuevoNombre">Nombre del Club</label>
+                        <input type = "text" id ="nuevoNombre" x-model = "nuevoNombre" placeholder = "Ej: Santiago Wanderers" required>
+                    </div>
+
+                    <div class ="form-group">
+                        <label for = "nuevosJugadores">Jugadores iniciales(separar por comas)</label>
+                        <input type = "text" id = "nuevosJugadores" x-model = "nuevosJugadores" placeholder = "Ej: Carlos Diaz , Marcelo Vasquez , etc." required>
+                    </div>
+                    <p x-show = "mensajeError" style ="color: #e74c3c; font-weight: bold;" x-text ="mensajeError"></p>
+                    <p x-show = "mensajeExito" style = "color: #2ecc71; font-weight: bold;" x-text = "mensajeExito"></p>
+
+                    <button type="submit" class = "btn-guardar">Agregar Club</button>
+                </form>
+            </div>
+
         </section>
 
         <section id="VistaPartidos" class="vista-content">
