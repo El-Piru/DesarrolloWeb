@@ -70,9 +70,10 @@ if (btnGol) {
 if (btnGolLocal) {
     btnGolLocal.addEventListener('click', function() {
         if (!hayPartidoActivo()) return;
+        const partido = obtenerPartidoActivo();
         const local = document.getElementById('marcadorLocalNombre').innerText;
-        const golesActuales = parseInt(document.getElementById('golesLocal').innerText) || 0;
-        document.getElementById('golesLocal').innerText = golesActuales + 1;
+        partido.golesLocal++;
+        document.getElementById('golesLocal').innerText = partido.golesLocal;
         registrarIncidencia(`¡GOL de ${local}!`);
         modalGol.style.display = 'none';
     });
@@ -81,9 +82,10 @@ if (btnGolLocal) {
 if (btnGolVisita) {
     btnGolVisita.addEventListener('click', function() {
         if (!hayPartidoActivo()) return;
+        const partido = obtenerPartidoActivo();
         const visitante = document.getElementById('marcadorVisitaNombre').innerText;
-        const golesActuales = parseInt(document.getElementById('golesVisita').innerText) || 0;
-        document.getElementById('golesVisita').innerText = golesActuales + 1;
+        partido.golesVisita++;
+        document.getElementById('golesVisita').innerText = partido.golesVisita;
         registrarIncidencia(`¡GOL de ${visitante}!`);
         modalGol.style.display = 'none';
     });
@@ -224,8 +226,6 @@ if (btnFinalizar) {
             displayTiempo.textContent = '00:00';
         }
 
-        partido.golesLocal = document.getElementById('golesLocal').textContent;
-        partido.golesVisita = document.getElementById('golesVisita').textContent;
         partido.estado = 'Finalizado';
 
         const items = document.querySelectorAll('#ListaEventos li');
