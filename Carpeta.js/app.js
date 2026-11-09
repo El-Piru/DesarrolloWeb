@@ -13,11 +13,27 @@ function mostrarVista(idVista) {
 
     const panelUsuario = document.querySelector('.usuario-panel');
     if (panelUsuario) {
-        if (idVista === 'VistaInicioSesión') {
+        if (idVista === 'VistaInicioSesión' || idVista === 'VistaRegistro') {
             panelUsuario.style.display = 'none';
         } else {
             panelUsuario.style.display = 'flex';
         }
+    }
+    const login = document.getElementById('btnLogin');
+    const registro = document.getElementById('btnRegistro');
+    switch (idVista) {
+        case 'VistaInicioSesión':
+            login.style.display = 'none';
+            registro.style.display = 'flex';
+            break;
+        case 'VistaRegistro':
+            registro.style.display = 'none';
+            login.style.display = 'flex';
+            break;
+        default:
+            login.style.display = 'none';
+            registro.style.display = 'none';
+            break;
     }
 }
 
@@ -63,9 +79,27 @@ if (btnGuardarConfig) {
 }
 
 
-document.getElementById('btnAdminArbitros')?.addEventListener('click', function() {
-    const lista = users.map(u => `• ${u.user} (${u.rol})`).join('\n');
-    alert('CUERPO ARBITRAL REGISTRADO:\n\n' + lista);
+document.getElementById('btnAdminArbitros')?.addEventListener('click', async function() {
+    try {
+        const response = await fetch('/api/usuarios');
+        if (!response.ok) {
+            throw new Error('No se pudo obtener la lista de árbitros.');
+        }
+
+        const usuarios = await response.json();
+        const arbitros = usuarios.filter(u => u.rol === 'Arbitro');
+        const listaArbitros = arbitros.map(a => `• ${a.user}`).join('\n');
+
+        if (listaArbitros.length === 0) {
+            alert('No hay árbitros registrados.');
+        } else {
+            alert('CUERPO ARBITRAL REGISTRADO:\n\n' + listaArbitros);
+        }
+
+    } catch (error) {
+        console.error('Error al obtener la lista de árbitros:', error);
+        alert('No se pudo obtener la lista de árbitros. Inténtelo más tarde.');
+    }
 });
 
 
