@@ -236,7 +236,8 @@ body {
     font-weight: 500;
 }
 
-.usuario-panel {
+.usuario-panel,
+.acceso-panel {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -252,7 +253,9 @@ body {
     font-weight: 600;
 }
 
-#cambiarRol {
+#cambiarRol,
+#btnRegistro,
+#btnLogin {
     background: transparent;
     color: var(--text);
     border: 1px solid var(--borde);
@@ -263,7 +266,9 @@ body {
     transition: 0.2s;
 }
 
-#cambiarRol:hover {
+#cambiarRol:hover,
+#btnRegistro:hover,
+#btnLogin:hover {
     background-color: rgba(255, 255, 255, 0.1);
     color: var(--primary);
 }
