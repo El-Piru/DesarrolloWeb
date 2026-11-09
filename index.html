@@ -17,18 +17,45 @@
             <span id="userBadge" class="badge">Árbitro: Alonsin</span>
             <button id="cambiarRol">Cerrar Sesión</button>
         </div>
+        <div class="acceso-panel">
+            <button type="button" id="btnRegistro">Crear Cuenta</button>
+            <button type="button" id="btnLogin">Iniciar Sesión</button>
+        </div>
     </header>
 
 
 
     <main class="container">
 
+        <section id="VistaRegistro" class="vista-content">
+            <div class="bienvenida-header">
+                <h2>Registro de Árbitro</h2>
+                <p class="subtitulo-bienvenida">Ingrese sus datos para registrarse</p>
+            </div> 
+            <p id="errorRegistro" class="error-message" hidden>No se pudo conectar con el servidor. Inténtelo más tarde</p>
+            <div class="card-form">
+                <form id="formRegistro">
+                    <div class="form-group">
+                        <label for="inputUsuarioRegistro">Usuario</label>
+                        <input type="text" id="inputUsuarioRegistro" minlength="3" placeholder="Ingrese su usario" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputPasswordRegistro">Contraseña (mínimo 8 carácteres)</label>
+                        <input type="password" id="inputPasswordRegistro" minlength="8" placeholder="Ingrese su contraseña" required>
+                    </div>
+
+                    <button type="submit" class="btn-guardar">Registrarse</button>
+                </form>
+            </div>
+        </section>
+
         <section id="VistaInicioSesión" class="vista-content active">
             <div class="bienvenida-header">
                 <h2>Bienvenido a Acta Digital</h2>
                 <p class="subtitulo-bienvenida">Inicia sesión para continuar</p>
             </div> 
-            <p id="errorLogin" class="error-message" hidden>No se pudieron cargar los datos. Inténtelo más tarde</p>
+            <p id="errorLogin" class="error-message" hidden>No se pudo conectar con el servidor. Inténtelo más tarde</p>
             <div class="card-form">
                 <form id="formLogin">
                     <div class="form-group">
@@ -375,6 +402,7 @@
 
     </main>
     <script src="Carpeta.js/app.js"></script>
+    <script src="Carpeta.js/registro.js"></script>
     <script src="Carpeta.js/login.js"></script>
     <script src="Carpeta.js/equipos.js"></script>
     <script src="Carpeta.js/partidos.js"></script>
@@ -382,4 +410,3 @@
     <script src="Carpeta.js/actas.js"></script>
 </body>
 </html>
-
