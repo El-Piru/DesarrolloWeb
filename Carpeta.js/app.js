@@ -12,34 +12,39 @@ function mostrarVista(idVista) {
     }
 
     const panelUsuario = document.querySelector('.usuario-panel');
-    if (panelUsuario) {
-        if (idVista === 'VistaInicioSesión' || idVista === 'VistaRegistro') {
-            panelUsuario.style.display = 'none';
-        } else {
-            panelUsuario.style.display = 'flex';
-        }
-    }
+    const panelAcceso = document.querySelector('.acceso-panel');
     const login = document.getElementById('btnLogin');
     const registro = document.getElementById('btnRegistro');
+    if (idVista === 'VistaInicioSesión' || idVista === 'VistaRegistro') {
+        if (panelUsuario) {
+            panelUsuario.style.display = 'none';
+        }
+        if (panelAcceso) {
+            panelAcceso.style.display = 'flex';
+        }
+    } else {
+        if (panelUsuario) {
+            panelUsuario.style.display = 'flex';
+        }
+        if (panelAcceso) {
+            panelAcceso.style.display = 'none';
+        }
+    }
     switch (idVista) {
         case 'VistaInicioSesión':
             login.style.display = 'none';
-            registro.style.display = 'flex';
+            registro.style.display = 'inline-flex';
             break;
         case 'VistaRegistro':
             registro.style.display = 'none';
-            login.style.display = 'flex';
-            break;
-        default:
-            login.style.display = 'none';
-            registro.style.display = 'none';
+            login.style.display = 'inline-flex';
             break;
     }
 }
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    mostrarVista('VistaInicioSesión');
+    mostrarVista('VistaMenuArbitro');
 
     const nombreGuardado = localStorage.getItem('nombreArbitroGuardado');
     if (nombreGuardado) {
