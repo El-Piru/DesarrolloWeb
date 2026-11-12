@@ -44,7 +44,7 @@ function mostrarVista(idVista) {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    mostrarVista('VistaMenuArbitro');
+    mostrarVista('VistaInicioSesión');
 
     const nombreGuardado = localStorage.getItem('nombreArbitroGuardado');
     if (nombreGuardado) {
